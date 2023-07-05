@@ -3,7 +3,6 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import React from 'react'
 import './Footer.css'
-
 function Footer() {
   return (
     <div className="footer">
