@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import "./css/shopleft.css";
 import { AiFillCaretDown } from 'react-icons/ai';
 import CheckboxList from './CheckboxeList';
 import dimensions from "../../Static/Dimensions.jpg";
-import SliderComponent from './SliderComponent';
-
+import SliderComponent from '../shope/SliderComponent';
+// import ParentComponent from './ParentComponent';
+import axios from 'axios';
+import { UserContext } from '../../UserContext';
 const ShopLeft = () => {
+  const { material, setmaterial} = useContext(UserContext)
   const [selectedCountry, setSelectedCountry] = useState("");
   const countries = ["USA", "Canada", "Mexico", "Brazil", "Japan"];
   const [isopen, setisopen] = useState(false);
@@ -18,10 +21,50 @@ const ShopLeft = () => {
   };
 
   const data = [
-    { id: 1, name: 'Item 1' },
-    { id: 2, name: 'Item 2' },
-    { id: 3, name: 'Item 3' },
+    // { id: 1, name: 'Item 1' },
+    // { id: 2, name: 'Item 2' },
+    // { id: 3, name: 'Item 3' },
+    // <div>
+    //     {/* Display the material data */}
+    //     {material.map((item) => (
+    //       <div key={item.id}>{item.name}</div>
+    //     ))}
+    //   </div>
   ];
+
+
+
+// Material DATA API STARTS
+
+
+
+  // //  const [material, setmaterial] = useState()
+
+  // useEffect(() => {
+     
+  //   return () => {
+  //     axios.get(
+  //       'https://api.businesscentral.dynamics.com/v2.0/4e94f06f-db01-47eb-aff3-7a284b01dd84/Sandbox/ODataV4/Company(%27My%20Company%27)/itemattributee',
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //         },
+  //         params: {
+  //           $filter: "Name eq 'Material'",
+  //         },
+  //       }
+  //       ).then((res)=>{
+  //         setmaterial(res.data.value)
+
+         
+  //       }
+  //       )
+  //   }
+  // }, [])
+
+
+  // MATERIAL DATA API CLOSED
+  
 
   return (
     <div className="main">
@@ -82,33 +125,34 @@ const ShopLeft = () => {
         <h2>TEMPRATURE &deg; C</h2>
         <div className='hr'></div>
       </div>
-      <SliderComponent />
+      <SliderComponent/> 
+      {/* <ParentComponent/> */}
       <div className="flex">
         <h2>BASE MATERIAL TYPE</h2>
         <div className='hr'></div>
       </div>
-      <CheckboxList data={data} />
+      <CheckboxList />
       <div className="flex">
         <h2>Sub MATERIAL TYPE</h2>
         <div className='hr'></div>
       </div>
-      <CheckboxList data={data} />
+      <CheckboxList  />
       <div className="flex">
         <h2>Compliance</h2>
         <div className='hr'></div>
       </div>
-      <CheckboxList data={data} />
+      {/* <CheckboxList data={data} /> */}
       <div className="flex">
         <h2>Hardness</h2>
         <div className='hr'></div>
       </div>
-      <CheckboxList data={data} />
+      {/* <CheckboxList data={data} /> */}
       
       <div className="flex">
         <h2>Color</h2>
         <div className='hr'></div>
       </div>
-      <CheckboxList data={data} />
+      {/* <CheckboxList data={data} /> */}
     </div>
   )
 }

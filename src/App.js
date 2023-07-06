@@ -1,12 +1,11 @@
 
-import React from 'react';
+import React, { useState } from 'react'
 // import  { useState } from 'react';
 import './App.css';
 import { UserContext } from '../src/UserContext'
 import {Routes, Route} from 'react-router-dom';
 import Index from './components/Index';
 import RequestQuote from './components/REquestQutoe/RequestQuote';
-import { useState } from 'react'
 import SignIn from './components/Signin/signin';
 import Signup from './components/Signup/Signup';
 import Checkout from './components/CheckoutComponent/Checkout';
@@ -19,11 +18,13 @@ function App() {
   const [sideMenuBar, setsideMenuBar] = useState(false)
   const [sideMenuBarDropDown, setsideMenuBarDropDown] = useState(false)
   const [sideMenuBarDropDownIndex, setsideMenuBarDropDownIndex] = useState(false)
+  
+  const [material, setmaterial] = useState(null);
 
   const [isCartopen, setisCartopen] = useState(false)
   return (
 
-    <UserContext.Provider value={{sideMenuBar,isCartopen,setisCartopen, setsideMenuBar, sideMenuBarDropDown, setsideMenuBarDropDown, sideMenuBarDropDownIndex, setsideMenuBarDropDownIndex}} >
+    <UserContext.Provider value={{sideMenuBar,isCartopen,  material, setmaterial, setisCartopen, setsideMenuBar, sideMenuBarDropDown, setsideMenuBarDropDown, sideMenuBarDropDownIndex, setsideMenuBarDropDownIndex}} >
      <Routes>
       
       <Route path='/' element={<Index/>}/>
