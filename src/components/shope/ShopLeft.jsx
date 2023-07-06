@@ -103,6 +103,7 @@ const ShopLeft = () => {
         <div className='hr'></div>
       </div>
       <CheckboxList data={data} />
+      
       <div className="flex">
         <h2>Color</h2>
         <div className='hr'></div>
