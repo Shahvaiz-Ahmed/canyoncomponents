@@ -1,27 +1,29 @@
 .contain {
-    border: 1px solid blanchedalmond;
+    border: 1px solid rgb(121, 120, 117);
     /* height: 10vh; */
     width: 35vw;
 }
 .bord{
-    border: 1.5px solid #797573;
-    margin: 2vw;
+    position: relative;
 }
 .qnty {
-    width: 3.5rem;
+    position: relative;
+    width: 5rem;
     height: 2rem;
-    border-color: #F9A66C;
+    border-color: black;
+    border-radius: 2px;
 }
 
 .btnqty {
-    width: 26rem;
+    width: 24rem;
     height: 2.5rem;
-    background-color: #F9A66C;
+    margin-left: 0.5rem;
+    background-color: #F4976C;
     color: wheat;
 }
 
 .btnqty:hover {
-    background-color: #ce6f2a;
+    background-color: #1565C0;
 
 }
 
@@ -29,6 +31,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 1rem;
 }
 .flex1{
     /* display: flex; */
@@ -41,12 +44,37 @@
 .addtocart{
     width: 8rem;
     height: 1.5rem;
-    background-color: #F9A66C;
+    background-color: #F4976B;
     color: wheat;
     float: right;
 }
 .addtocart:hover{
    
-    background-color: #ce6f2a;
+    background-color: #1565C0;
   
 }
+
+@media (max-width: 767px) {
+    .contain {
+      width: 90vw;
+      margin: 0 auto;
+    }
+  
+    .flex {
+      flex-direction: row;
+    }
+    .qnty{
+        margin-top:1rem ;
+    }
+  
+    .btnqty {
+      width: 100%;
+      margin-top: 1rem;
+    }
+  
+    .addtocart {
+      float: none;
+      width: 100%;
+      margin-top: 1rem;
+    }
+  }

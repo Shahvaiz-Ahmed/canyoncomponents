@@ -1,22 +1,28 @@
 import React, { useContext, useState } from 'react';
+import {Scrollbars} from 'react-custom-scrollbars'
 import "./css/shopleft.css"
+import axios from 'axios'
+
 import { AiFillCaretDown } from 'react-icons/ai';
 import CheckboxList from './CheckboxeList';
 import  dimensions  from "../../Static/Dimensions.jpg";
 import SliderComponent from './SliderComponent';
 import CartPopup from '../CartPopup/CartPopup';
 import { UserContext } from '../../UserContext';
+import SubMaterial from './SubMaterial';
 // import { Link } from 'react-router-dom';
 
 
-const ShopLeft = () => {
+const ShopLeft = ({Data}) => {
   const {isCartopen,setisCartopen}=useContext(UserContext);
   const [selectedCountry, setSelectedCountry] = useState("");
   const countries = ["USA", "Canada", "Mexico", "Brazil", "Japan"];
   const [isopen, setisopen] = useState(false)
   const [size, setsize] = useState(0);
   const [cs, setCs] = useState(0);
-  const [id, setid] = useState(0)
+  const [id, setid] = useState(0);
+  
+
   const handleCountryChange = (event) => {
     setSelectedCountry(event.target.value);
   };
@@ -26,13 +32,16 @@ const ShopLeft = () => {
     { id: 3, name: 'Item 3' },
   ];
   return (
-    <div className="main ">
+    <Scrollbars style={{width:'20vw', height:'100%',overflowX: 'hidden'}}>
+    <div className="main " style={{
+      width: '30vw'
+    }}>
       <div className='flex'>
 
         <h2>KEYWORD</h2>
         <div className='hr' ></div>
       </div>
-      <div className='keywoedSearch'>
+      <div className='keywordSearch'>
         <div>
           <input type="text" placeholder='Search' className='searchinput' />
         </div>
@@ -48,7 +57,7 @@ const ShopLeft = () => {
 
 
         <h2>
-          DIMENSIONS(mm)
+             DIMENSIONS(mm)
         </h2>
         <div className='hr' ></div>
        
@@ -67,7 +76,7 @@ const ShopLeft = () => {
      <select value={selectedCountry}className='country' onChange={handleCountryChange}>
         <option value="">Select Country</option>
         {countries.map((country) => (
-          <option key={country} value={country}>
+          <option  key={country} value={country}>
             {country}
           </option>
         ))}
@@ -94,7 +103,7 @@ const ShopLeft = () => {
       {
           isopen?
           <div>
-            <div style={{width:'15vw',height:'20vh',marginTop:'2rem',border:"2px solid grey",overflowY:'scroll'}}>
+            <div className='checkboxstyle' >
               <input type="checkbox" name="" id="" />10 20 30 <br />
               <input type="checkbox" name="" id="" />10 20 30 <br />
               <input type="checkbox" name="" id="" />10 20 30 <br />
@@ -115,12 +124,12 @@ const ShopLeft = () => {
       <h2>BASE MATERIAL TYPE</h2>
       <div className='hr' ></div>
       </div>
-      <CheckboxList data={data} />
+      <CheckboxList />
       <div className="flex">
       <h2>Sub MATERIAL TYPE</h2>
       <div className='hr' ></div>
       </div>
-      <CheckboxList data={data} />
+      <SubMaterial />
           <div className="flex">
       <h2>Compliance</h2>
       <div className='hr' ></div>
@@ -141,6 +150,7 @@ const ShopLeft = () => {
 
 
     </div>
+    </Scrollbars>
   )
 }
 

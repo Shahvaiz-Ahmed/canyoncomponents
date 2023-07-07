@@ -1,0 +1,110 @@
+
+.border {
+    height: 60vh;
+    width: 100vw;
+    border-color: #F4966B;
+    background-color: white;
+    z-index: 6;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-bottom: 2.0rem;
+}
+.flexwrap{
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+.leftcart {
+    flex: 1.5;
+}
+
+.headingcolor {
+    color: #F4966B;
+    line-height: 0%;
+    
+}
+
+.summarybanner {
+  
+    background-color: #BB6E53;
+    width: 20vw;
+    height: 20vh;
+    line-height: 80%;
+    border-radius: 1vh;
+    transform: translate(10%, 4%);
+}
+.summarybanner1 {
+    width: 20vw;
+    height: 20vh;
+    border-radius: 1vh;
+    transform: translate(10%, 20%);
+}
+.summarybanner2 {
+    background-color: #FFEEBA;
+    width: 20vw;
+    height: 10vh;
+    border-radius: 1vh;
+    line-height: 100%;
+    transform: translate(1%, 20%);
+}
+.btn
+{
+    background-color: #BB6E53;
+    border-radius: 1vh;
+    width: 20vw;
+    height: 6vh;
+}
+.btn:hover
+{
+    background-color: #F4966B;
+    
+}
+.flexbtn{
+    display: flex;
+    justify-content: center;
+}
+.btn1
+{
+    background-color: white;
+    border-radius: 1vh;
+    width: 20vw;
+    color: black;
+    border:2px solid #BB6E53 ;
+    height: 5vh;
+    margin-top: 5vh;
+}
+.btn1:hover
+{
+    background-color: #BB6E53;
+    color: #fff;
+    
+}
+.flex{
+    display: flex;
+}
+
+.tableborder {
+    margin-left: 1vh;
+    margin-top: vh;
+    border-top: 2px solid #FFFFFF;
+    border-bottom: 2px solid #FFFFFF;
+}
+.flexbaner{
+    margin-top: 0.21rem;
+    display: flex;
+    line-height: 20%;
+    justify-content: space-between;
+}
+.heading {
+    margin: 2vh;
+}
+
+.ordersummary {
+    height: 78vh;
+    width: 25vw;
+    border: px solid #FFFFFF;
+    border-radius: 1rem;
+    /* margin: 1vh; */
+}

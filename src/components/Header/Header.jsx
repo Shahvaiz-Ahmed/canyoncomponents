@@ -6,7 +6,7 @@ import React, { useContext } from 'react'
 
 function Header() {
 
-  const {sideMenuBar, setsideMenuBar} = useContext(UserContext)
+  const {sideMenuBar} = useContext(UserContext)
 
   return (
     <div className="header">

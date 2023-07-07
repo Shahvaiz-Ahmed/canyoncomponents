@@ -175,6 +175,9 @@ export default function NavBar() {
             component="div"
             alt='logo'
             sx={{ display: { xs: 'none', sm: 'block' }}}
+            style={{
+              padding: '1rem'
+            }}
           />
           </Link>
           <Search>
