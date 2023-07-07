@@ -1,4 +1,5 @@
 .sideMenu{
+    height: 100vh;
     background-color: rgba(24, 46, 73, 1);
     color: white;
     position: absolute;

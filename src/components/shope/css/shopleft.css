@@ -1,7 +1,8 @@
 .main {
   color: black;
   width: 20vw;
-  margin: 0;
+  align-items: first baseline;
+  margin:0 !important;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -32,10 +33,13 @@
 
 .flex {
   display: flex;
+  margin-left: 0px;
+ 
 }
 .keywordSearch {
     display: flex;
       flex-direction: column;
+      align-items: center;
     }
 .country{
   width: 15vw;
@@ -45,7 +49,9 @@
 .row {
   display: flex;
   width: 15vw;
-  justify-content: space-between;
+  justify-content: left;
+  gap: 11px;
+  
 }
 
 .sizeinput {
@@ -62,3 +68,23 @@
   margin-bottom: 20px;
   width: 15vw;
 }
+.checkboxstyle{width:40vw;
+  height:20vh;margin-top:2rem;
+  border:2px solid grey;overflow-y:scroll}
+@media (max-width<=767px) {
+  .checkboxstyle{width:20vw;
+    height:20vh;margin-top:2rem;
+    border:2px solid grey;overflow-y:scroll}
+ 
+}
+
+
+
+
+
+
+
+
+
+
+

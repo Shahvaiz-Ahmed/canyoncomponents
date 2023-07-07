@@ -1,0 +1,93 @@
+.detailedDesc{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pdfDetail{
+    display: flex;
+    max-height: 20vh;
+    font-size: x-large;
+    font-weight: 500;
+    align-items: center;
+}
+ 
+#pdf{
+    display: flex;
+    flex-direction: column;
+   
+    background-color: aliceblue;
+    padding: 2rem;
+}
+
+#pdf img{
+    padding: 2rem;
+    max-height: 15vh;
+}
+
+.specification{
+    min-width: 60%;
+}
+
+.specification table{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.specification table tr{
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.specification table tr th{
+    font-size: x-large;
+    font-weight: 700;
+    font-stretch: wider;
+    background-color: #F4976C;
+}
+@media (max-width:768px) {
+    .pdfDetail {
+        margin-top: 9px;
+      font-size: 18px;
+    }
+    #pdf{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color:aliceblue;
+        width: 50px;
+        height: 100px;
+      
+    }
+    button{
+        width: 70px;
+        height: 50px;
+       
+     
+    }
+    table{
+        margin: 5px;
+    }
+  
+    #pdf img {
+      padding: 1rem;
+      max-height: 8vh;
+    }
+  
+    .specification {
+      min-width: unset;
+    }
+  
+    .specification table tr {
+      flex-direction: row;
+      gap: 1rem;
+    }
+  
+    .specification table tr th,
+    .specification table tr td {
+      font-size: large;
+    }
+  }
