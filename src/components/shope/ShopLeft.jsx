@@ -1,14 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import "./css/shopleft.css";
 import { AiFillCaretDown } from 'react-icons/ai';
 import CheckboxList from './CheckboxeList';
 import dimensions from "../../Static/Dimensions.jpg";
 import SliderComponent from '../shope/SliderComponent';
+import Color from './Color'
 // import ParentComponent from './ParentComponent';
-import axios from 'axios';
-import { UserContext } from '../../UserContext';
+// import axios from 'axios';
+// import { UserContext } from '../../UserContext';
+import SubMaterial from './SubMaterial';
+import DurometerRange_Compliance from './DurometerRange_Compliance';
+import Brand from './Brand';
 const ShopLeft = () => {
-  const { material, setmaterial} = useContext(UserContext)
+  // const { material, setmaterial} = useContext(UserContext)
   const [selectedCountry, setSelectedCountry] = useState("");
   const countries = ["USA", "Canada", "Mexico", "Brazil", "Japan"];
   const [isopen, setisopen] = useState(false);
@@ -136,7 +140,7 @@ const ShopLeft = () => {
         <h2>Sub MATERIAL TYPE</h2>
         <div className='hr'></div>
       </div>
-      <CheckboxList  />
+      <SubMaterial/>
       <div className="flex">
         <h2>Compliance</h2>
         <div className='hr'></div>
@@ -147,13 +151,19 @@ const ShopLeft = () => {
         <div className='hr'></div>
       </div>
       {/* <CheckboxList data={data} /> */}
-      
+      <DurometerRange_Compliance/>
       <div className="flex">
         <h2>Color</h2>
         <div className='hr'></div>
       </div>
-      {/* <CheckboxList data={data} /> */}
+      <Color/>
+      <div className="flex">
+        <h2>Brand</h2>
+        <div className='hr'></div>
+      </div>
+      <Brand/>
     </div>
+    
   )
 }
 

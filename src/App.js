@@ -18,13 +18,21 @@ function App() {
   const [sideMenuBar, setsideMenuBar] = useState(false)
   const [sideMenuBarDropDown, setsideMenuBarDropDown] = useState(false)
   const [sideMenuBarDropDownIndex, setsideMenuBarDropDownIndex] = useState(false)
-  
+  // API DATA BELOW
   const [material, setmaterial] = useState(null);
+  const [SubMaterial, setSubMaterial] = useState(null);
+  const [Color, setColor] = useState(null)
+  const [DurometerRange_Compliance, setDurometerRange_Compliance] = useState(null)
+  const [Brand, setBrand] = useState(null)
+  // const [Compliance, setCompliance] = useState(null)
+  
+
+
 
   const [isCartopen, setisCartopen] = useState(false)
   return (
 
-    <UserContext.Provider value={{sideMenuBar,isCartopen,  material, setmaterial, setisCartopen, setsideMenuBar, sideMenuBarDropDown, setsideMenuBarDropDown, sideMenuBarDropDownIndex, setsideMenuBarDropDownIndex}} >
+    <UserContext.Provider value={{sideMenuBar,isCartopen,Brand, setBrand,SubMaterial,Color,DurometerRange_Compliance, setDurometerRange_Compliance, setColor, setSubMaterial,  material, setmaterial, setisCartopen, setsideMenuBar, sideMenuBarDropDown, setsideMenuBarDropDown, sideMenuBarDropDownIndex, setsideMenuBarDropDownIndex}} >
      <Routes>
       
       <Route path='/' element={<Index/>}/>
