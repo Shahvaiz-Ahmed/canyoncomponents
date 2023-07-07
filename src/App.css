@@ -1,43 +1,28 @@
-.App {
+body {
+  overflow-x: hidden;
   position: relative;
   margin: 0;
   padding: 0;
 }
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 7px;
   height: 7px;
 }
 
 /* Track */
-::-webkit-scrollbar-track {
+/* ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px grey; 
   border-radius: 5px;
-}
+} */
  
 /* Handle */
-::-webkit-scrollbar-thumb {
+/* ::-webkit-scrollbar-thumb {
   background: rgb(219, 186, 186); 
   border-radius: 5px;
 }
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+/* ::-webkit-scrollbar-thumb:hover {
   background: #706565; 
-}
+} */ 
 
-/* .App :first-child{
-  position: fixed;
-  width: 100%;
-  height: 15%;
-  top: 0;
-  color: antiquewhite;
-  background-color: rgb(31,23,37 );
-}
-
-.App :last-child{
-  position: fixed;
-  height: 15%;
-  width: 100%;
-  bottom: 0;
-  background-color: antiquewhite;
-} */

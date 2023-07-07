@@ -1,0 +1,95 @@
+.productComponent{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.productDesc{
+    display: flex;
+    
+}
+
+.productDesc img{
+    padding: 10px;
+}
+
+.checkPriceQuantity{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+} 
+
+#checkQuantity{
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: fit-content;
+    display: flex;
+    border: 0.7px solid black;
+    padding: 1rem;
+}
+
+#checkQuantity :first-child{
+    display: flex;
+    flex: 1;
+}
+
+#checkQuantity button{
+    display: flex;
+    flex: 1.5;
+}
+
+.recomendedProducts{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.recomendedCards{
+    display: flex;
+    position: relative;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.recomendedCards *{
+    position: relative;
+}
+@media (max-width: 767px) {
+    .productComponent {
+      align-items: center;
+    }
+  
+    .productDesc {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    h4{
+        margin: 20px;
+    }
+  
+    .productDesc img {
+      padding: 5px;
+    }
+  
+    .checkPriceQuantity {
+      align-items: center;
+      text-align: center;
+    }
+  
+    #checkQuantity {
+      flex-direction: column;
+      align-items: center;
+      padding: 0.5rem;
+    }
+  
+    #checkQuantity button {
+      margin-top: 0.5rem;
+    }
+  
+    .recomendedCards {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
