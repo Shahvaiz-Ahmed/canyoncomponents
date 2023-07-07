@@ -11,6 +11,7 @@ import Color from './Color'
 import SubMaterial from './SubMaterial';
 import DurometerRange_Compliance from './DurometerRange_Compliance';
 import Brand from './Brand';
+import Compliance from './Compliance';
 const ShopLeft = () => {
   // const { material, setmaterial} = useContext(UserContext)
   const [selectedCountry, setSelectedCountry] = useState("");
@@ -130,38 +131,37 @@ const ShopLeft = () => {
         <div className='hr'></div>
       </div>
       <SliderComponent/> 
-      {/* <ParentComponent/> */}
       <div className="flex">
         <h2>BASE MATERIAL TYPE</h2>
         <div className='hr'></div>
       </div>
-      <CheckboxList />
+       {/* <CheckboxList />  */}
       <div className="flex">
         <h2>Sub MATERIAL TYPE</h2>
         <div className='hr'></div>
       </div>
-      <SubMaterial/>
+      {/* <SubMaterial/> */}
       <div className="flex">
         <h2>Compliance</h2>
         <div className='hr'></div>
       </div>
-      {/* <CheckboxList data={data} /> */}
+       <Compliance/> 
       <div className="flex">
         <h2>Hardness</h2>
         <div className='hr'></div>
       </div>
       {/* <CheckboxList data={data} /> */}
-      <DurometerRange_Compliance/>
+      {/* <DurometerRange_Compliance/> */}
       <div className="flex">
         <h2>Color</h2>
         <div className='hr'></div>
       </div>
-      <Color/>
+      {/* <Color/> */}
       <div className="flex">
         <h2>Brand</h2>
         <div className='hr'></div>
       </div>
-      <Brand/>
+      {/* <Brand/> */}
     </div>
     
   )
