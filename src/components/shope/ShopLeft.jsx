@@ -15,6 +15,7 @@ import Brand from './Brand';
 import Compliance from './Compliance';
 const ShopLeft = () => {
   // const { material, setmaterial} = useContext(UserContext)
+  const [isCartopen, setisCartopen] = useState(null)
   const [selectedCountry, setSelectedCountry] = useState("");
   const countries = ["USA", "Canada", "Mexico", "Brazil", "Japan"];
   const [isopen, setisopen] = useState(false)
@@ -110,7 +111,7 @@ const ShopLeft = () => {
       <h2>BASE MATERIAL TYPE</h2>
       <div className='hr' ></div>
       </div>
-       {/* <CheckboxList />  */}
+        <CheckboxList />  
       <div className="flex">
       <h2>Sub MATERIAL TYPE</h2>
       <div className='hr' ></div>
@@ -120,7 +121,7 @@ const ShopLeft = () => {
         <h2>Compliance</h2>
         <div className='hr'></div>
       </div>
-       <Compliance/> 
+       {/* <Compliance/>  */}
       <div className="flex">
         <h2>Hardness</h2>
         <div className='hr'></div>

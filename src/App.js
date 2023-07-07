@@ -5,12 +5,11 @@ import React from 'react';
 import './App.css';
 import { UserContext } from '../src/UserContext'
 import { Routes, Route} from 'react-router-dom';
-import Index from './Components/Index.jsx';
-import RequestQuote from './Components/REquestQutoe/RequestQuote';
-import ProductComponent from './Components/ProductOverview/ProductComponent';
-
+import Index from './components/Index.jsx';
+import RequestQuote from './components/REquestQutoe/RequestQuote';
+import ProductComponent from './components/ProductOverview/ProductComponent'
 import { useState } from 'react'
-import CartPopup from './Components/CartPopup/CartPopup';
+import CartPopup from './components/CartPopup/CartPopup';
 import { useEffect } from 'react';
 // import CheckPrice from './components/CheckPrice/CheckPrice';
 
