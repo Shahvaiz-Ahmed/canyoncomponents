@@ -1,9 +1,8 @@
-import '../Footer/Footer.css'
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import React from 'react'
-
+import '../Footer/Footer.css'
 function Footer() {
   return (
     <div className="footer">

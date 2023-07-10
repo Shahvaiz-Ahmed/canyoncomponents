@@ -3,14 +3,16 @@ import Sleft from "./ShopLeft"
 import Sright from "./ShopRight";
 import Drawer  from './Drawer';
 import { useContext } from 'react';
-import axios from 'axios'
+// import axios from 'axios'
 import './Shop.css'
-
+import Table from './CustomPaginationActionsTable';
 import { UserContext } from '../../UserContext';
 import  { useEffect, useState } from 'react';
-import zIndex from '@mui/material/styles/zIndex';
+// import zIndex from '@mui/material/styles/zIndex';
 
 const Shope = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+
   const {isdraweropen,setisdraweropen} = useContext(UserContext);
 const [isMobileView, setIsMobileView] = useState(false);
 
@@ -34,6 +36,7 @@ const [isMobileView, setIsMobileView] = useState(false);
   
 
   return (
+    
     <div className="row">
       <div>
         {isMobileView ? (
