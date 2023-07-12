@@ -7,6 +7,7 @@ import CheckboxList from "./CheckboxeList";
 import dimensions from "../../Static/Dimensions.jpg";
 import SliderComponent from "./SliderComponent";
 import CartPopup from "../CartPopup/CartPopup";
+import Color from "./Color";
 import { UserContext } from "../../UserContext";
 // import SubMaterial from './SubMaterial';
 // import DurometerRange_Compliance from './DurometerRange_Compliance';
@@ -160,7 +161,7 @@ const ShopLeft = () => {
           <h2>Color</h2>
           <div className="hr"></div>
         </div>
-        {/* <Color/> */}
+         <Color/> 
         <div className="flex">
           <h2>Brand</h2>
           <div className="hr"></div>

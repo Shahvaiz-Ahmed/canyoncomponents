@@ -1,8 +1,5 @@
-import * as React from "react";
-import { Scrollbars } from "react-custom-scrollbars";
-// import PropTypes from 'prop-types';
-// import { alpha } from '@mui/material/styles';
-import Box from "@mui/material/Box";
+import { useEffect, useState } from "react";
+import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -10,376 +7,134 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-// import TableSortLabel from '@mui/material/TableSortLabel';
-// import Toolbar from '@mui/material/Toolbar';
-// import Typography from '@mui/material/Typography';
-import Paper from "@mui/material/Paper";
-// import Checkbox from '@mui/material/Checkbox';
-// import IconButton from '@mui/material/IconButton';
-// import Tooltip from '@mui/material/Tooltip';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import Switch from '@mui/material/Switch';
-// import DeleteIcon from '@mui/icons-material/Delete';
-// import FilterListIcon from '@mui/icons-material/FilterList';
-// import { visuallyHidden } from '@mui/utils';
-// import { WrapText } from '@mui/icons-material';
-import { UserContext } from "../../UserContext";
+import axios from "axios";
 
-// function createData(name, calories, fat, carbs, protein) {
-//   return {
-//     name,
-//     calories,
-//     fat,
-//     carbs,
-//     protein,
-//   };
-// }
+const accessToken =
+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiJodHRwczovL2FwaS5idXNpbmVzc2NlbnRyYWwuZHluYW1pY3MuY29tIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0LyIsImlhdCI6MTY4OTE2MzU1NywibmJmIjoxNjg5MTYzNTU3LCJleHAiOjE2ODkxNjc0NTcsImFpbyI6IkUyWmdZUGdzcEx6MmsyTWFJL2QyTmc1WjAwWFZBQT09IiwiYXBwaWQiOiI2ODE0N2NmZS1kNDcyLTQ3ODgtYTlhYy03YWE4MDQyNDlhOTYiLCJhcHBpZGFjciI6IjEiLCJpZHAiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC80ZTk0ZjA2Zi1kYjAxLTQ3ZWItYWZmMy03YTI4NGIwMWRkODQvIiwiaWR0eXAiOiJhcHAiLCJvaWQiOiI3YTA2ZjFjYi0xOGMyLTRkY2ItOTQ3OS1kOTU4YTk4YzM0MWUiLCJyaCI6IjAuQVVZQWJfQ1VUZ0hiNjBldjgzb29Td0hkaEQzdmJabHNzMU5CaGdlbV9Ud0J1SjlHQUFBLiIsInJvbGVzIjpbIkF1dG9tYXRpb24uUmVhZFdyaXRlLkFsbCIsImFwcF9hY2Nlc3MiLCJBZG1pbkNlbnRlci5SZWFkV3JpdGUuQWxsIiwiQVBJLlJlYWRXcml0ZS5BbGwiXSwic3ViIjoiN2EwNmYxY2ItMThjMi00ZGNiLTk0NzktZDk1OGE5OGMzNDFlIiwidGlkIjoiNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0IiwidXRpIjoia0N1OXhXTGtha2lnbWpGR0lRaEJBQSIsInZlciI6IjEuMCJ9.VzDt7S4BuXzTkPL0p-K24QhOkig6Sk1Z1v8pMLPgOOB-QtmPV4W8295Z_w9Q4PnIWHSgNILP6d-cQDwfNiYhkH92OQIb32vvWKKINQ8GbvtzZCMH0USGs-yON4ylNbPtuKla0CGU2Ad9RmuFjPJ49pweKOWbfJfRc0lYiuE7fJ-isPb4u-CJ9smKZTO_I9ywZd0RFryt1v5wBBTiwpWwRZPNqpif65z7HP75eax8jSjGUxRZiJUczxdAgaFbhAKI8Y9B4xRnHGoukq-FEr7BrXgNaS9dM5TXwO2Nzb2Ow829_R_RCp53qvEsV29gOn11ILgaWdC0ngfRkk_yJ1Zv3g";
+//   let previousItemNo = null;
+// let productArray = [
 
-const rows = [
-  {
-    Partno: "jj",
-    StartingPrice: 10.0,
-    Stock: "OUT OF STOCK",
-    Material: "PLA",
-    Color: "Red",
-    Hardness: 90,
-    Scale: "Shore B",
-    Type: "Wrist Wear",
-    Size: "AS568-204",
-    cs: 3.53,
-    id: 9.12,
-    Materialdesc:
-      "CanRez CP80BK21 FFKM Black FDA USP VI 87 88 AED NACE Ultra Steam 8OA",
-    Heightemp: 310,
-    Lowtemp: -10,
-  },
-  {
-    Partno: "nn",
-    StartingPrice: 12.0,
-    Stock: "IN STOCK",
-    Material: "PLA",
-    Color: "Blue",
-    Hardness: 910,
-    Scale: "Shore C",
-    Type: "Wrist Wear",
-    Size: "AS568-204",
-    cs: 3.53,
-    id: 9.12,
-    Materialdesc:
-      "CanRez CP80BK21 FFKM Black FDA USP VI 87 88 AED NACE Ultra Steam 8OA",
-    Heightemp: 341,
-    Lowtemp: -25,
-  },
-  {
-    Partno: "mm",
-    StartingPrice: 220.0,
-    Stock: "IN STOCK",
-    Material: "PLA",
-    Color: "Green",
-    Hardness: 910,
-    Scale: "Shore D",
-    Type: "Wrist Wear",
-    Size: "AS568-204",
-    cs: 3.53,
-    id: 9.12,
-    Materialdesc:
-      "CanRez CP80BK21 FFKM Black FDA USP VI 87 88 AED NACE Ultra Steam 8OA",
-    Heightemp: 320,
-    Lowtemp: -15,
-  },
-  {
-    Partno: "aa",
-    StartingPrice: 50.0,
-    Stock: "OUT OF STOCK",
-    Material: "PLA",
-    Color: "Black",
-    Hardness: 910,
-    Scale: "Shore F",
-    Type: "Wrist Wear",
-    Size: "AS568-204",
-    cs: 3.53,
-    id: 9.12,
-    Materialdesc:
-      "CanRez CP80BK21 FFKM Black FDA USP VI 87 88 AED NACE Ultra Steam 8OA",
-    Heightemp: 320,
-    Lowtemp: -15,
-  },
-  {
-    Partno: "dd",
-    StartingPrice: 125.0,
-    Stock: "IN STOCK",
-    Material: "PLA",
-    Color: "Blue",
-    Hardness: 910,
-    Scale: "Shore C",
-    Type: "Wrist Wear",
-    Size: "AS568-204",
-    cs: 3.53,
-    id: 9.12,
-    Materialdesc:
-      "CanRez CP80BK21 FFKM Black FDA USP VI 87 88 AED NACE Ultra Steam 8OA",
-    Heightemp: 320,
-    Lowtemp: -15,
-  },
-  {
-    Partno: "ee",
-    StartingPrice: 120.0,
-    Stock: "OUT OF STOCK",
-    Material: "PLA",
-    Color: "Blue",
-    Hardness: 910,
-    Scale: "Shore E",
-    Type: "Wrist Wear",
-    Size: "AS568-204",
-    cs: 3.53,
-    id: 9.12,
-    Materialdesc:
-      "CanRez CP80BK21 FFKM Black FDA USP VI 87 88 AED NACE Ultra Steam 8OA",
-    Heightemp: 320,
-    Lowtemp: -15,
-  },
-  {
-    Partno: "tt",
-    StartingPrice: 60.0,
-    Stock: "IN STOCK",
-    Material: "PLA",
-    Color: "Orange",
-    Hardness: 910,
-    Scale: "Shore A",
-    Type: "Wrist Wear",
-    Size: "AS568-204",
-    cs: 3.53,
-    id: 9.12,
-    Materialdesc:
-      "CanRez CP80BK21 FFKM Black FDA USP VI 87 88 AED NACE Ultra Steam 8OA",
-    Heightemp: 320,
-    Lowtemp: -15,
-  },
-  {
-    Partno: "uu",
-    StartingPrice: 30.0,
-    Stock: "IN STOCK",
-    Material: "PLA",
-    Color: "White",
-    Hardness: 910,
-    Scale: "Shore H",
-    Type: "Wrist Wear",
-    Size: "AS568-204",
-    cs: 3.53,
-    id: 9.12,
-    Materialdesc:
-      "CanRez CP80BK21 FFKM Black FDA USP VI 87 88 AED NACE Ultra Steam 8OA",
-    Heightemp: 320,
-    Lowtemp: -15,
-  },
-  {
-    Partno: "jj",
-    StartingPrice: 420.0,
-    Stock: "IN STOCK",
-    Material: "PLA",
-    Color: "Blue",
-    Hardness: 910,
-    Scale: "Shore U",
-    Type: "Wrist Wear",
-    Size: "AS568-204",
-    cs: 3.53,
-    id: 9.12,
-    Materialdesc:
-      "CanRez CP80BK21 FFKM Black FDA USP VI 87 88 AED NACE Ultra Steam 8OA",
-    Heightemp: 320,
-    Lowtemp: -15,
-  },
-  {
-    Partno: "kk",
-    StartingPrice: 14.0,
-    Stock: "IN STOCK",
-    Material: "PLA",
-    Color: "Grey",
-    Hardness: 910,
-    Scale: "Shore T",
-    Type: "Wrist Wear",
-    Size: "AS568-204",
-    cs: 3.53,
-    id: 9.12,
-    Materialdesc:
-      "CanRez CP80BK21 FFKM Black FDA USP VI 87 88 AED NACE Ultra Steam 8OA",
-    Heightemp: 320,
-    Lowtemp: -15,
-  },
-  {
-    Partno: "hh",
-    StartingPrice: 167.0,
-    Stock: "IN STOCK",
-    Material: "PLA",
-    Color: "Blue",
-    Hardness: 910,
-    Scale: "Shore J",
-    Type: "Wrist Wear",
-    Size: "AS568-204",
-    cs: 3.53,
-    id: 9.12,
-    Materialdesc:
-      "CanRez CP80BK21 FFKM Black FDA USP VI 87 88 AED NACE Ultra Steam 8OA",
-    Heightemp: 320,
-    Lowtemp: -15,
-  },
-  {
-    Partno: "ll",
-    StartingPrice: 165.0,
-    Stock: "OUT OF STOCK",
-    Material: "PLA",
-    Color: "Blue",
-    Hardness: 910,
-    Scale: "Shore D",
-    Type: "Wrist Wear",
-    Size: "AS568-204",
-    cs: 3.53,
-    id: 9.12,
-    Materialdesc:
-      "CanRez CP80BK21 FFKM Black FDA USP VI 87 88 AED NACE Ultra Steam 8OA",
-    Heightemp: 320,
-    Lowtemp: -15,
-  },
-];
+// ];
+// let currentProduct = null;
 
-function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
+let previousItemNo = null;
 
-function getComparator(order, orderBy) {
-  return order === "desc"
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
-}
+let productArray = [];
 
-// Since 2020 all major browsers ensure sort stability with Array.prototype.sort().
-// stableSort() brings sort stability to non-modern browsers (notably IE11). If you
-// only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
-// with exampleArray.slice().sort(exampleComparator)
-function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) {
-      return order;
-    }
-    return a[1] - b[1];
-  });
-  return stabilizedThis.map((el) => el[0]);
-}
+let currentProduct = null;
 
 const columns = [
+  { id: "name", label: "Part Number", minWidth: 170 },
+  { id: "code", label: "Material", minWidth: 100 },
   {
-    field: "Partno",
-    headerName: "Part No",
-    width: 200,
-  },
-  {
-    field: "StartingPrice",
-    headerName: "Starting Price",
-    width: 50,
-    type: "number",
-  },
-  { field: "Stock", headerName: "Stock", width: 100 },
-  {
-    field: "Material",
-    headerName: "Material",
-  },
-  {
-    field: "Color",
-    headerName: "Color",
-  },
+    id: "population",
+    label: "Material ",
 
-  {
-    field: "Hardness",
-    headerName: "Hardness",
+    align: "left",
+    format: (value) => value.toLocaleString("en-US"),
   },
   {
-    field: "Scale",
-    headerName: "Scale",
+    id: "size",
+    label: "Hardness",
+
+    align: "left",
+    format: (value) => value.toLocaleString("en-US"),
   },
   {
-    field: "Type",
-    headerName: "Type",
+    id: "scale",
+    label: "Scale",
+
+    align: "left",
+    format: (value) => value.toFixed(2),
   },
   {
-    field: "Size",
-    headerName: "Size",
+    id: "density",
+    label: "Density",
+
+    align: "left",
+    format: (value) => value.toFixed(2),
   },
   {
-    field: "CS",
-    headerName: "CS",
+    id: "density",
+    label: "Color",
+
+    align: "left",
+    format: (value) => value.toFixed(2),
   },
   {
-    field: "ID",
-    headerName: "ID",
+    id: "density",
+    label: "Density",
+
+    align: "left",
+    format: (value) => value.toFixed(2),
   },
   {
-    field: "Materialdesc",
-    headerName: "Material Description",
+    id: "density",
+    label: "Low Temp(C)",
+
+    align: "left",
+    format: (value) => value.toFixed(2),
   },
   {
-    field: "Heightemp",
-    headerName: "Heigh Temp",
+    id: "density",
+    label: "High Temp (C)",
+
+    align: "left",
+    format: (value) => value.toFixed(2),
   },
   {
-    field: "Lowtemp",
-    headerName: "Low Temp",
+    id: "density",
+    label: "Type",
+
+    align: "left",
+    format: (value) => value.toFixed(2),
+  },
+  {
+    id: "density",
+    label: "Density",
+
+    align: "left",
+    format: (value) => value.toFixed(2),
+  },
+  {
+    id: "density",
+    label: "Density",
+
+    align: "left",
+    format: (value) => value.toFixed(2),
+  },
+  {
+    id: "density",
+    label: "Density",
+
+    align: "left",
+    format: (value) => value.toFixed(2),
+  },
+  {
+    id: "density",
+    label: "Size",
+
+    align: "left",
+    format: (value) => value.toFixed(2),
+  },
+  {
+    id: "density",
+    label: "Online",
+
+    align: "left",
+    format: (value) => value.toFixed(2),
   },
 ];
 
-function EnhancedTableHead() {
-  // const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
-  //   props;
-  // const createSortHandler = (property) => (event) => {
-  //   onRequestSort(event, property);
-  // };
-
-  return (
-    <TableHead>
-      <TableRow>
-        {columns.map((headCell) => (
-          <TableCell
-            style={{
-              backgroundColor: "#182E49",
-              color: "#fff",
-              fontWeight: "bold",
-              fontSize: "18px",
-            }}
-            key={headCell.field}
-            align={headCell.align}
-            // padding={headCell.disablePadding ? 'none' : 'normal'}
-            // sortDirection={orderBy === headCell.id ? order : false}
-          >
-            {headCell.headerName}
-          </TableCell>
-        ))}
-      </TableRow>
-    </TableHead>
-  );
+function createData(name, code, population, size) {
+  const density = population / size;
+  return { name, code, population, size, density };
 }
 
 export default function CustomPaginationActionsTable() {
-  const { datax } = React.useContext(UserContext);
-  console.log(datax);
-  const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("calories");
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === "asc";
-    setOrder(isAsc ? "desc" : "asc");
-    setOrderBy(property);
-  };
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const rows = [];
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -389,182 +144,143 @@ export default function CustomPaginationActionsTable() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  const [ItemDetails, setItemDetails] = useState([]);
 
-  // const handleClick = (event, name) => {
-  //   const selectedIndex = selected.indexOf(name);
-  //   let newSelected = [];
+  useEffect(() => {
+    return () => {
+      axios
+        .get(
+          "https://api.businesscentral.dynamics.com/v2.0/4e94f06f-db01-47eb-aff3-7a284b01dd84/Sandbox/ODataV4/Company('My%20Company')/ItemApi",
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data.value);
+          setItemDetails(res.data.value);
 
-  //   if (selectedIndex === -1) {
-  //     newSelected = newSelected.concat(selected, name);
-  //   } else if (selectedIndex === 0) {
-  //     newSelected = newSelected.concat(selected.slice(1));
-  //   } else if (selectedIndex === selected.length - 1) {
-  //     newSelected = newSelected.concat(selected.slice(0, -1));
-  //   } else if (selectedIndex > 0) {
-  //     newSelected = newSelected.concat(
-  //       selected.slice(0, selectedIndex),
-  //       selected.slice(selectedIndex + 1),
-  //     );
-  //   }
+         const items = ItemDetails;
 
-  //   setSelected(newSelected);
-  // };
+          items.forEach((item) => {
+            const isSameProduct = item.ItemNo === previousItemNo;
 
-  // const handleChangePage = (event, newPage) => {
-  //   setPage(newPage);
-  // };
+            previousItemNo = item.ItemNo;
 
-  // const handleChangeRowsPerPage = (event) => {
-  //   setRowsPerPage(parseInt(event.target.value, 10));
-  //   setPage(0);
-  // };
+            if (!isSameProduct) {
+              if (currentProduct !== null) {
+                productArray.push(currentProduct);
+              }
 
-  // const isSelected = (name) => selected.indexOf(name) !== -1;
+              currentProduct = {
+                ItemNo: item.ItemNo,
 
-  // // Avoid a layout jump when reaching the last page with empty rows.
-  // const emptyRows =
-  //   page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+                AttributeList: [],
+              };
+            }
 
-  const visibleRows = React.useMemo(
-    () =>
-      stableSort(rows, getComparator(order, orderBy)).slice(
-        page * rowsPerPage,
-        page * rowsPerPage + rowsPerPage
-      ),
-    [order, orderBy, page, rowsPerPage, datax]
-  );
-console.log(visibleRows.filter(
-  (location) =>  location?.Lowtemp === datax?.lowtemp &&
-  location?.Heightemp === datax?.hightemp
-))
+            const attribute = {
+              Description2: item.Description2,
+              SearchDescription: item.SearchDescription,
+            };
+
+            // Add the Compound Number as a key-value pair to the attribute object
+
+            const compoundNumberKey = item.AttributeName || "Compound Number";
+
+            attribute[compoundNumberKey] = item.AttributeValue;
+
+            currentProduct.AttributeList.push(attribute);
+          });
+
+          if (currentProduct !== null) {
+            productArray.push(currentProduct);
+          }
+          console.log(productArray)
+        })
+        .catch((err) => console.log(err));
+    };
+  }, [ItemDetails]);
+
   return (
-    <>
-      <Scrollbars style={{ width: "71.2%", height: "100vh" }}>
-        <Box sx={{ width: "120vw" }}>
-          <Paper sx={{ width: "100%", mb: 2 }}>
-            {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
-            <TableContainer>
-              <Table
-                stickyHeader
-                aria-label="sticky table"
-                // sx={{ minWidth: 750 }}
-                aria-labelledby="tableTitle"
-              >
-                <EnhancedTableHead />
-                <TableBody>
-                  {visibleRows
-                    .filter((location) => {
-                      if (
-                        datax?.search === "" &&
-                        datax?.lowtemp === "" &&
-                        datax?.hightemp === ""
-                      ) {
-                        return visibleRows;
-                      } else if (datax?.search === "") {
-                        if (datax?.lowtemp === "" && datax?.hightemp === "") {
-                          return visibleRows;
-                        } else {
-                          if (
-                            location?.Lowtemp === datax?.lowtemp &&
-                            location?.Heightemp === datax?.hightemp
-                          ) {
-                            return visibleRows;
-                          }
-                        }
-                      } else {
-                        if (
-                          location?.Color?.toLowerCase()?.includes(
-                            datax?.search?.toLowerCase()
-                          )
-                        ) {
-                          return visibleRows;
-                        } else if (
-                          location?.Scale?.toLowerCase()?.includes(
-                            datax?.search?.toLowerCase()
-                          )
-                        ) {
-                          return visibleRows;
-                        } else if (
-                          location?.Type?.toLowerCase()?.includes(
-                            datax?.search?.toLowerCase()
-                          )
-                        ) {
-                          return visibleRows;
-                        }
-                      }
-                    })
-                    .map((row, index) => {
-                      // const isItemSelected = isSelected(row.name);
-                      // const labelId = `enhanced-table-checkbox-${index}`;
-
-                      return (
-                        <TableRow
-                          hover
-                          // onClick={(event) => handleClick(event, row.name)}
-                          role="checkbox"
-                          // aria-checked={isItemSelected}
-                          tabIndex={-5}
-                          key={row.name}
-                          // selected={isItemSelected}
-                          sx={{ cursor: "pointer" }}
-                        >
-                          <TableCell>{row.Partno}</TableCell>
-                          <TableCell align="baseline">
-                            {row.StartingPrice}
-                          </TableCell>
-                          <TableCell
-                            align="baseline"
-                            style={{
-                              backgroundColor:
-                                row.Stock === "IN STOCK" ? "green" : "red",
-                            }}
-                          >
-                            {row.Stock}{" "}
-                          </TableCell>
-                          <TableCell align="baseline">{row.Material}</TableCell>
-                          <TableCell align="baseline">{row.Color}</TableCell>
-                          <TableCell align="baseline">{row.Hardness}</TableCell>
-                          <TableCell align="baseline">{row.Scale}</TableCell>
-                          <TableCell align="baseline">{row.Type}</TableCell>
-
-                          <TableCell align="baseline">{row.Size}</TableCell>
-                          <TableCell align="baseline">{row.cs}</TableCell>
-                          <TableCell align="baseline">{row.id}</TableCell>
-                          <TableCell align="baseline">
-                            {row.Materialdesc}
-                          </TableCell>
-
-                          <TableCell align="baseline">
-                            {row.Heightemp}
-                          </TableCell>
-                          <TableCell align="baseline">{row.Lowtemp}</TableCell>
-                        </TableRow>
-                      );
-                    })}
-                  {/* {emptyRows > 0 && (
-                  <TableRow
-                    style={{
-                      height: (dense ? 33 : 53) * emptyRows,
-                    }}
-                  >
-                    <TableCell colSpan={6} />
-                  </TableRow>
-                )} */}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <TablePagination
-              rowsPerPageOptions={[5, 10, 15]}
-              component="div"
-              count={rows.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          </Paper>
-        </Box>
-      </Scrollbars>
-    </>
+    <Paper sx={{ width: "100%" }}>
+      <TableContainer sx={{ maxHeight: 550 }}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{
+                    minWidth: column.minWidth,
+                    backgroundColor: "#182E49",
+                    color: "#fff",
+                    fontWeight: "bold",
+                    fontSize: "18px",
+                  }}
+                >
+                  {column.label}
+                </TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {productArray ? (
+              productArray
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row) => {
+                  return (
+                    <TableRow hover tabIndex={-1} key={row.code}>
+                      {row.AttributeList.map((column) => {
+                        const value = row[column];
+                        return (
+                          <>
+                            <TableCell
+                              key={column}
+                              align={column.align}
+                              style={{ top: 57, minWidth: column.minWidth }}
+                            >
+                              <TableRow tabIndex={3}>
+                                {column.SearchDescription}
+                              </TableRow>
+                              <TableRow
+                                tabIndex={3}
+                                style={{
+                                  position: "relative",
+                                  right: 0,
+                                }}
+                              >
+                                {column.AttributeValue}
+                              </TableRow>
+                            </TableCell>
+                            <TableCell>
+                            <TableRow tabIndex={3}>
+                                {/* {column.} */}
+                              </TableRow>
+                            </TableCell>
+                          </>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })
+            ) : (
+              <></>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={rows.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
   );
 }
