@@ -5,7 +5,7 @@ import axios from "axios";
 const Brand = () => {
     const [selectedItems, setSelectedItems] = useState([]);
     const accessToken =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiJodHRwczovL2FwaS5idXNpbmVzc2NlbnRyYWwuZHluYW1pY3MuY29tIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0LyIsImlhdCI6MTY4ODcwNTk1MCwibmJmIjoxNjg4NzA1OTUwLCJleHAiOjE2ODg3MDk4NTAsImFpbyI6IkUyWmdZSkJJMTErZVYrRVYzYjZqSVlQN2FaQVVBQT09IiwiYXBwaWQiOiI2ODE0N2NmZS1kNDcyLTQ3ODgtYTlhYy03YWE4MDQyNDlhOTYiLCJhcHBpZGFjciI6IjEiLCJpZHAiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC80ZTk0ZjA2Zi1kYjAxLTQ3ZWItYWZmMy03YTI4NGIwMWRkODQvIiwiaWR0eXAiOiJhcHAiLCJvaWQiOiI3YTA2ZjFjYi0xOGMyLTRkY2ItOTQ3OS1kOTU4YTk4YzM0MWUiLCJyaCI6IjAuQVVZQWJfQ1VUZ0hiNjBldjgzb29Td0hkaEQzdmJabHNzMU5CaGdlbV9Ud0J1SjlHQUFBLiIsInJvbGVzIjpbIkF1dG9tYXRpb24uUmVhZFdyaXRlLkFsbCIsImFwcF9hY2Nlc3MiLCJBZG1pbkNlbnRlci5SZWFkV3JpdGUuQWxsIiwiQVBJLlJlYWRXcml0ZS5BbGwiXSwic3ViIjoiN2EwNmYxY2ItMThjMi00ZGNiLTk0NzktZDk1OGE5OGMzNDFlIiwidGlkIjoiNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0IiwidXRpIjoiSnRqT0lYZGxkRXVIT1R3OHNLWk9BQSIsInZlciI6IjEuMCJ9.hK1ZgcXCJBFj55W99FiwjwtNfwN9cnatzcu2kNyndQmzXECStYZrWriEPCOO3cGm52x5KbDfZx5ztY3MsUVZxT4CawuOVxBjtiskWKYxxxS6efepGbcqWkzFsQh8sejx1huHCcI-2Q5oVElSOW81Fl90I5vZbs_R0_HTgb7miqVQ-8eEYeIj-9_0_JQl-cIGidxY0KoQB4Oi-TIsaoVQX1ZqEP3TtuYFow-rnkpoD9t36ndumdzFrCrc__l3uVG_utmCVggWNIwuduq4BzdmxyUVKhjEXLa-tfTEfZLrvUKNgD6z0vR1_L1IEqQ2RpTUAV8kZJ5t80foDJE-Ut37qA";
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiJodHRwczovL2FwaS5idXNpbmVzc2NlbnRyYWwuZHluYW1pY3MuY29tIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0LyIsImlhdCI6MTY4OTIzOTQ0NSwibmJmIjoxNjg5MjM5NDQ1LCJleHAiOjE2ODkyNDMzNDUsImFpbyI6IkUyWmdZSmlrM1puOTY1Sjhuc25PeUc1ZitaVXZBQT09IiwiYXBwaWQiOiI2ODE0N2NmZS1kNDcyLTQ3ODgtYTlhYy03YWE4MDQyNDlhOTYiLCJhcHBpZGFjciI6IjEiLCJpZHAiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC80ZTk0ZjA2Zi1kYjAxLTQ3ZWItYWZmMy03YTI4NGIwMWRkODQvIiwiaWR0eXAiOiJhcHAiLCJvaWQiOiI3YTA2ZjFjYi0xOGMyLTRkY2ItOTQ3OS1kOTU4YTk4YzM0MWUiLCJyaCI6IjAuQVVZQWJfQ1VUZ0hiNjBldjgzb29Td0hkaEQzdmJabHNzMU5CaGdlbV9Ud0J1SjlHQUFBLiIsInJvbGVzIjpbIkF1dG9tYXRpb24uUmVhZFdyaXRlLkFsbCIsImFwcF9hY2Nlc3MiLCJBZG1pbkNlbnRlci5SZWFkV3JpdGUuQWxsIiwiQVBJLlJlYWRXcml0ZS5BbGwiXSwic3ViIjoiN2EwNmYxY2ItMThjMi00ZGNiLTk0NzktZDk1OGE5OGMzNDFlIiwidGlkIjoiNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0IiwidXRpIjoiZGNwaTBKNmsxRWlMdTJtTUJta19BQSIsInZlciI6IjEuMCJ9.H40udV76d7Re_0BlI7-kf0b6S0LzqNBCLzrNh0fAMjXb1Z9rENu170pNi0JNorDn1OHvBMtGI_X3rNC6oVhwAZEVPqcB_L5T88HzkeKlpFehmKFwpr5jP4PD-pO2cztnJvkG8wU2kFSHi-osE12rRupl7Zmgp2u3NpTOGUBfUBCnUtyEshqwXskFiLBgA7DZv5JSCiyHaxsKMMQ1oWRYsCZWNmmKqRUPXLAYTvsVwWTyIGzJDHUyPE7QBijy86i3Xrvh9fU7aA2mhyt57XyqMCCTzHOHWGTBcqVbGHWyAFqs9HtkQoUHwJpdLz67pRp2SWdeiex3RZo3QTMnQWh8PA";
   // const [material, setmaterial] = useState()
   const [Brand, setBrand] = useState();
   useEffect(() => {
@@ -24,8 +24,7 @@ const Brand = () => {
         )
         .then((res) => {
           setBrand(res.data.value[0].Values.split(","));
-          console.log(Brand);
-        });
+         });
     };
   }, [Brand]);
 
@@ -36,8 +35,7 @@ const Brand = () => {
     } else {
         setSelectedItems(selectedItems.filter((id) => id!== itemId && id!== itemId.id));
     }
-    console.log(selectedItems);
-};
+ };
   return (
     <div>
         {Brand ? Brand.map((item) => {

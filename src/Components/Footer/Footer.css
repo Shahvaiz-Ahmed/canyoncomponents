@@ -1,12 +1,12 @@
 .footer{
     position: relative;
     top: 255px;
-    background-color: rgba(24, 46, 73, 1);
+    /* background-color: rgba(24, 46, 73, 1); */
+    background-color: #a07f71;
     color: #e8dad4;
     display: flex;
     justify-content: space-between;
     margin-top: -15rem;
-    
 }
 @media (max-width: 746px) {
    
@@ -78,8 +78,8 @@
     color: white;
 }
 
-#socialMediaIcons{ 
-}
+/* #socialMediaIcons{ 
+} */
 /* @media (max-width: 746px) {
    
     .footer {

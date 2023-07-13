@@ -6,7 +6,7 @@ import BasicTable from './BasicTable'
 // import Button from '@mui/material/Button';
 import RecomendedCard from './RecomendedCard';
 import DetailedDesc from './DetailedDesc/DetailedDesc';
-import Layout from '../Layout/Layout';
+import Layout from '../Layout/Layout'
 import CheckPrice from '../CheckPrice/CheckPrice';
 import CartPopup from '../CartPopup/CartPopup';
 import { UserContext } from '../../UserContext';

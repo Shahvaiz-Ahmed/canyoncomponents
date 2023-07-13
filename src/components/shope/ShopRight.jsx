@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import './css/shopright.css';
 // import ProductTable from './ProductTable';
-import CustomPaginationActionsTable from './CustomPaginationActionsTable';
+import CustomPaginationActionsTable from './ItemDetails';
 import { useState,useEffect } from 'react';
 import { UserContext } from '../../UserContext';
 
@@ -58,7 +58,7 @@ const ShopRight = () => {
   
   return (
     <div style={{
-      width: '70vw'
+      width: '78.4vw'
     }}>
       <div className="row1" style={{
         "width":"100vw"
@@ -78,7 +78,7 @@ const ShopRight = () => {
   
       
       </div >
-      <div style={{"width":"110vw"}}>
+      <div>
     < CustomPaginationActionsTable />
     </div>
     {/* <ProductTable/> */}
