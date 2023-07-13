@@ -8,13 +8,13 @@ import dimensions from "../../Static/Dimensions.jpg";
 import SliderComponent from "./SliderComponent";
 import CartPopup from "../CartPopup/CartPopup";
 import Color from "./Color";
+import Brand from './Brand'
+import Compliance from './Compliance'
+import SubMaterial from './SubMaterial'
+import DurometerRange_Compliance from './DurometerRange_Compliance'
 import { UserContext } from "../../UserContext";
-// import SubMaterial from './SubMaterial';
-// import DurometerRange_Compliance from './DurometerRange_Compliance';
-// import Brand from './Brand';
-// import Compliance from './Compliance';
+
 const ShopLeft = () => {
-  // const { material, setmaterial} = useContext(UserContext)
   const { datax, updateData } = useContext(UserContext);
 
   const [isCartopen, setisCartopen] = useState(null);
@@ -145,18 +145,17 @@ const ShopLeft = () => {
           <h2>Sub MATERIAL TYPE</h2>
           <div className="hr"></div>
         </div>
-        {/* <SubMaterial/> */}
+        <SubMaterial/>
         <div className="flex">
           <h2>Compliance</h2>
           <div className="hr"></div>
         </div>
-        {/* <Compliance/>  */}
+         <Compliance/>  
         <div className="flex">
           <h2>Hardness</h2>
           <div className="hr"></div>
         </div>
-        {/* <CheckboxList data={data} /> */}
-        {/* <DurometerRange_Compliance/> */}
+        <DurometerRange_Compliance/> 
         <div className="flex">
           <h2>Color</h2>
           <div className="hr"></div>
@@ -166,7 +165,7 @@ const ShopLeft = () => {
           <h2>Brand</h2>
           <div className="hr"></div>
         </div>
-        {/* <Brand/> */}
+        <Brand/>
       </div>
     </Scrollbars>
   );

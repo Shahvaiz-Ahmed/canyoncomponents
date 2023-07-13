@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import './css/shopright.css';
 // import ProductTable from './ProductTable';
-import CustomPaginationActionsTable from './CustomPaginationActionsTable';
+import CustomPaginationActionsTable from './ItemDetails';
 import { useState,useEffect } from 'react';
 import { UserContext } from '../../UserContext';
 

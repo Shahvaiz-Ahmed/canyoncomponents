@@ -10,12 +10,9 @@ import TableRow from "@mui/material/TableRow";
 import axios from "axios";
 
 const accessToken =
-"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiJodHRwczovL2FwaS5idXNpbmVzc2NlbnRyYWwuZHluYW1pY3MuY29tIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0LyIsImlhdCI6MTY4OTE2MzU1NywibmJmIjoxNjg5MTYzNTU3LCJleHAiOjE2ODkxNjc0NTcsImFpbyI6IkUyWmdZUGdzcEx6MmsyTWFJL2QyTmc1WjAwWFZBQT09IiwiYXBwaWQiOiI2ODE0N2NmZS1kNDcyLTQ3ODgtYTlhYy03YWE4MDQyNDlhOTYiLCJhcHBpZGFjciI6IjEiLCJpZHAiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC80ZTk0ZjA2Zi1kYjAxLTQ3ZWItYWZmMy03YTI4NGIwMWRkODQvIiwiaWR0eXAiOiJhcHAiLCJvaWQiOiI3YTA2ZjFjYi0xOGMyLTRkY2ItOTQ3OS1kOTU4YTk4YzM0MWUiLCJyaCI6IjAuQVVZQWJfQ1VUZ0hiNjBldjgzb29Td0hkaEQzdmJabHNzMU5CaGdlbV9Ud0J1SjlHQUFBLiIsInJvbGVzIjpbIkF1dG9tYXRpb24uUmVhZFdyaXRlLkFsbCIsImFwcF9hY2Nlc3MiLCJBZG1pbkNlbnRlci5SZWFkV3JpdGUuQWxsIiwiQVBJLlJlYWRXcml0ZS5BbGwiXSwic3ViIjoiN2EwNmYxY2ItMThjMi00ZGNiLTk0NzktZDk1OGE5OGMzNDFlIiwidGlkIjoiNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0IiwidXRpIjoia0N1OXhXTGtha2lnbWpGR0lRaEJBQSIsInZlciI6IjEuMCJ9.VzDt7S4BuXzTkPL0p-K24QhOkig6Sk1Z1v8pMLPgOOB-QtmPV4W8295Z_w9Q4PnIWHSgNILP6d-cQDwfNiYhkH92OQIb32vvWKKINQ8GbvtzZCMH0USGs-yON4ylNbPtuKla0CGU2Ad9RmuFjPJ49pweKOWbfJfRc0lYiuE7fJ-isPb4u-CJ9smKZTO_I9ywZd0RFryt1v5wBBTiwpWwRZPNqpif65z7HP75eax8jSjGUxRZiJUczxdAgaFbhAKI8Y9B4xRnHGoukq-FEr7BrXgNaS9dM5TXwO2Nzb2Ow829_R_RCp53qvEsV29gOn11ILgaWdC0ngfRkk_yJ1Zv3g";
-//   let previousItemNo = null;
-// let productArray = [
+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiJodHRwczovL2FwaS5idXNpbmVzc2NlbnRyYWwuZHluYW1pY3MuY29tIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0LyIsImlhdCI6MTY4OTE3NjY4NywibmJmIjoxNjg5MTc2Njg3LCJleHAiOjE2ODkxODA1ODcsImFpbyI6IkUyWmdZTkRsVDYxZUdEZnhVdWpzM3VrYWY4cW1BUUE9IiwiYXBwaWQiOiI2ODE0N2NmZS1kNDcyLTQ3ODgtYTlhYy03YWE4MDQyNDlhOTYiLCJhcHBpZGFjciI6IjEiLCJpZHAiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC80ZTk0ZjA2Zi1kYjAxLTQ3ZWItYWZmMy03YTI4NGIwMWRkODQvIiwiaWR0eXAiOiJhcHAiLCJvaWQiOiI3YTA2ZjFjYi0xOGMyLTRkY2ItOTQ3OS1kOTU4YTk4YzM0MWUiLCJyaCI6IjAuQVVZQWJfQ1VUZ0hiNjBldjgzb29Td0hkaEQzdmJabHNzMU5CaGdlbV9Ud0J1SjlHQUFBLiIsInJvbGVzIjpbIkF1dG9tYXRpb24uUmVhZFdyaXRlLkFsbCIsImFwcF9hY2Nlc3MiLCJBZG1pbkNlbnRlci5SZWFkV3JpdGUuQWxsIiwiQVBJLlJlYWRXcml0ZS5BbGwiXSwic3ViIjoiN2EwNmYxY2ItMThjMi00ZGNiLTk0NzktZDk1OGE5OGMzNDFlIiwidGlkIjoiNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0IiwidXRpIjoiV21NaDNJS24ya2VYMFZaT3FuSTNBQSIsInZlciI6IjEuMCJ9.N7HXiteQS9PHws-UtpuJibOPIqDjV2ahgVZj9VX5vhLWTOKBYYn3g8hWmYTBuYZ1S68lpdmzI5KE3vz5bC_MI9L0XRoslHHCsWnfLhpCA2mewjYcbojiXRukAVM3C7M4hbkclB_lmVpkzv4NzR1cXOuic8lfRa-qL1f6mka4TdqyJipzI01gARMtb4iozF1VUxM_iH2qgdjfpCdWzMe4Y2ec_LHFn2G67ZayAeoomTA4PG7wUQE4aCT2sktG2Z_d9IR9bpxEjshGaBR81U6ERubx8p_qTKejqNZTFuM2XqFTl9DLtGLDonNWWPZZA90UvLW2JvBi4l_92ODs3A6e1w";
 
-// ];
-// let currentProduct = null;
+
 
 let previousItemNo = null;
 
@@ -131,7 +128,7 @@ function createData(name, code, population, size) {
   return { name, code, population, size, density };
 }
 
-export default function CustomPaginationActionsTable() {
+export default function ItemDetails() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const rows = [];
@@ -254,12 +251,9 @@ export default function CustomPaginationActionsTable() {
                               >
                                 {column.AttributeValue}
                               </TableRow>
+                               
                             </TableCell>
-                            <TableCell>
-                            <TableRow tabIndex={3}>
-                                {/* {column.} */}
-                              </TableRow>
-                            </TableCell>
+                           
                           </>
                         );
                       })}
@@ -273,7 +267,7 @@ export default function CustomPaginationActionsTable() {
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
+        rowsPerPageOptions={[2, 25, 100]}
         component="div"
         count={rows.length}
         rowsPerPage={rowsPerPage}

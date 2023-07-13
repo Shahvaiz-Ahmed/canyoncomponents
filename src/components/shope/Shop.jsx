@@ -5,7 +5,7 @@ import Drawer  from './Drawer';
 import { useContext } from 'react';
 // import axios from 'axios'
 import './Shop.css'
-import Table from './CustomPaginationActionsTable';
+import Table from './ItemDetails';
 import { UserContext } from '../../UserContext';
 import  { useEffect, useState } from 'react';
 // import zIndex from '@mui/material/styles/zIndex';
