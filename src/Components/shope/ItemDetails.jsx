@@ -1,29 +1,18 @@
 import { useEffect, useState } from "react";
-
 import React from "react";
-
 import Paper from "@mui/material/Paper";
-
 import Table from "@mui/material/Table";
-
 import TableBody from "@mui/material/TableBody";
-
 import TableCell from "@mui/material/TableCell";
-
 import TableContainer from "@mui/material/TableContainer";
-
 import TableHead from "@mui/material/TableHead";
-
 import TablePagination from "@mui/material/TablePagination";
-
 import TableRow from "@mui/material/TableRow";
-
 import { UserContext } from "../../UserContext";
-
 import axios from "axios";
 
 const accessToken =
-  "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiJodHRwczovL2FwaS5idXNpbmVzc2NlbnRyYWwuZHluYW1pY3MuY29tIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0LyIsImlhdCI6MTY4OTI0NDYzNiwibmJmIjoxNjg5MjQ0NjM2LCJleHAiOjE2ODkyNDg1MzYsImFpbyI6IkUyWmdZREI4eUhwZDQ3eEc5S3UzSlQvTWRwMThBZ0E9IiwiYXBwaWQiOiI2ODE0N2NmZS1kNDcyLTQ3ODgtYTlhYy03YWE4MDQyNDlhOTYiLCJhcHBpZGFjciI6IjEiLCJpZHAiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC80ZTk0ZjA2Zi1kYjAxLTQ3ZWItYWZmMy03YTI4NGIwMWRkODQvIiwiaWR0eXAiOiJhcHAiLCJvaWQiOiI3YTA2ZjFjYi0xOGMyLTRkY2ItOTQ3OS1kOTU4YTk4YzM0MWUiLCJyaCI6IjAuQVVZQWJfQ1VUZ0hiNjBldjgzb29Td0hkaEQzdmJabHNzMU5CaGdlbV9Ud0J1SjlHQUFBLiIsInJvbGVzIjpbIkF1dG9tYXRpb24uUmVhZFdyaXRlLkFsbCIsImFwcF9hY2Nlc3MiLCJBZG1pbkNlbnRlci5SZWFkV3JpdGUuQWxsIiwiQVBJLlJlYWRXcml0ZS5BbGwiXSwic3ViIjoiN2EwNmYxY2ItMThjMi00ZGNiLTk0NzktZDk1OGE5OGMzNDFlIiwidGlkIjoiNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0IiwidXRpIjoidm9RcmRFcmFCa2k2ZW1WVXBRazhBQSIsInZlciI6IjEuMCJ9.NXevIMFHqlhpXm0qYcuPzD6DXgiyA03l6aj78emNhpKn05aYynXTKUHERPHNz1iDAZ35wRUSdVM5wLSHDinTs1BU15qDYSr4q0O5ZV79QxDzH1kSW0JQocI8UT8S_blBEP6L-n1gZDf_dmKJqVCrJOu_2JEH84VgaXPvPy9hUtxFahvobod45-g4e5TSPKJ9YgWL_DvkmPXUqM1mAC1WuFEhKqbnFnrYsc35jGLK5XOnoAfaJAo3rkzrSDP3KOri4HEEA2KMD7UMW1mLBUkF_iEjFfJqsaxfr82AJ5j11cet6wPtGIXO9X9X-5CQBroESoKvUcJtyYD8IslLrCJbSg";
+  "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiJodHRwczovL2FwaS5idXNpbmVzc2NlbnRyYWwuZHluYW1pY3MuY29tIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0LyIsImlhdCI6MTY4OTI1MzU2NywibmJmIjoxNjg5MjUzNTY3LCJleHAiOjE2ODkyNTc0NjcsImFpbyI6IkUyWmdZQWplekdlVzZocmxmT3BtOEVWOU8va0dBQT09IiwiYXBwaWQiOiI2ODE0N2NmZS1kNDcyLTQ3ODgtYTlhYy03YWE4MDQyNDlhOTYiLCJhcHBpZGFjciI6IjEiLCJpZHAiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC80ZTk0ZjA2Zi1kYjAxLTQ3ZWItYWZmMy03YTI4NGIwMWRkODQvIiwiaWR0eXAiOiJhcHAiLCJvaWQiOiI3YTA2ZjFjYi0xOGMyLTRkY2ItOTQ3OS1kOTU4YTk4YzM0MWUiLCJyaCI6IjAuQVVZQWJfQ1VUZ0hiNjBldjgzb29Td0hkaEQzdmJabHNzMU5CaGdlbV9Ud0J1SjlHQUFBLiIsInJvbGVzIjpbIkF1dG9tYXRpb24uUmVhZFdyaXRlLkFsbCIsImFwcF9hY2Nlc3MiLCJBZG1pbkNlbnRlci5SZWFkV3JpdGUuQWxsIiwiQVBJLlJlYWRXcml0ZS5BbGwiXSwic3ViIjoiN2EwNmYxY2ItMThjMi00ZGNiLTk0NzktZDk1OGE5OGMzNDFlIiwidGlkIjoiNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0IiwidXRpIjoiNEx0eHJrTy1PRXFzS19KWi1ob1VBQSIsInZlciI6IjEuMCJ9.KHpWvMK8BNEAWw6M6rPGdpfvb79ADY3xZuv4qn9sZEaeLQm4Qvq8Vconqx1TWHNcDUSXU2VVlhLCbLrMxJiNJnZ6eGXSdGiafkJlzd4rq1-n4MfL9UMxMf20F0Se7hE4fHQskyNc9M7hizBOg8-cBnnXh75wu3D8LcrNB82bZNc6d1vAgNCS4mjpCaQ00iKeAmU773SsiOwPWUdTV31r6ffo1H4soP0HVY5VWw47OxOssTQBstWbMDsihppFI-Dxfj0iacQW5B1u5emUpq8xA2oAl6qdG9goY3AC1iTRbRJ0peWx_6nMdZ8cIdKxifWCuSIoCHHcQQcWTj2lVsRg8Q";
 
 const duroScale = "Durometer Scale";
 
@@ -60,16 +49,19 @@ function stableSort(array, comparator) {
 }
 
 const columns = [
-  { id: "name", label: "Part No", minWidth: 170 },
 
-  { id: "code", label: "Starting Price", minWidth: 100 },
+  
+
+  { id: "name", label: "Part No", minWidth: 130 },
+
+  { id: "code", label: "Starting Price", minWidth: 30 },
 
   {
     id: "population",
 
-    label: "STOCK",
+    label: "Stock",
 
-    minWidth: 170,
+    minWidth: 60,
 
     align: "left",
 
@@ -81,7 +73,7 @@ const columns = [
 
     label: "Material",
 
-    minWidth: 170,
+    minWidth: 90,
 
     align: "left",
 
@@ -93,7 +85,7 @@ const columns = [
 
     label: "Color",
 
-    minWidth: 170,
+    minWidth: 30,
 
     align: "left",
 
@@ -105,7 +97,7 @@ const columns = [
 
     label: "Hardness",
 
-    minWidth: 170,
+    minWidth: 30,
 
     align: "left",
 
@@ -115,9 +107,9 @@ const columns = [
   {
     id: "scale",
 
-    label: "scale",
+    label: "Scale",
 
-    minWidth: 170,
+    minWidth: 60,
 
     align: "left",
 
@@ -129,7 +121,7 @@ const columns = [
 
     label: "Type",
 
-    minWidth: 170,
+    minWidth: 60,
 
     align: "left",
 
@@ -141,7 +133,7 @@ const columns = [
 
     label: "Size",
 
-    minWidth: 170,
+    minWidth: 60,
 
     align: "left",
 
@@ -149,11 +141,11 @@ const columns = [
   },
 
   {
-    id: "CS(mm)",
+    id: "CS",
 
-    label: "CS(mm)",
+    label: "CS",
 
-    minWidth: 170,
+    minWidth: 60,
 
     align: "left",
 
@@ -161,11 +153,11 @@ const columns = [
   },
 
   {
-    id: "ID(mm)",
+    id: "ID",
 
-    label: "ID(mm)",
+    label: "ID",
 
-    minWidth: 170,
+    minWidth: 60,
 
     align: "left",
 
@@ -189,7 +181,7 @@ const columns = [
 
     label: "High Temp(C)",
 
-    minWidth: 170,
+    minWidth: 30,
 
     align: "left",
 
@@ -199,9 +191,9 @@ const columns = [
   {
     id: "Low Temp(C)",
 
-    label: "Low Temp(C)",
+    label: "Low Temp (C)",
 
-    minWidth: 170,
+    minWidth: 60,
 
     align: "left",
 

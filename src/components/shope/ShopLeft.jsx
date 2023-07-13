@@ -52,8 +52,9 @@ const ShopLeft = () => {
           <div>
             <input
               type="text"
-              placeholder="Search by color, scale, type"
+              placeholder="Search Here"
               className="searchinput"
+              style={{backgroundColor: '#fff'}}
               onChange={(e) => setsearch(e.target.value)}
             />
           </div>
@@ -81,6 +82,7 @@ const ShopLeft = () => {
           <select
             value={selectedCountry}
             className="country"
+            style={{backgroundColor:'#fff'}}
             onChange={handleCountryChange}
           >
             <option value="">Select Country</option>
@@ -99,7 +101,8 @@ const ShopLeft = () => {
           />
 
           <input
-            type="number"
+          style={{backgroundColor:'#fff'}}
+            type="text"
             className="sizeinput"
             placeholder="Size"
             min={0}
@@ -110,6 +113,7 @@ const ShopLeft = () => {
           <div className="updown"></div>
 
           <input
+          style={{backgroundColor:'#fff'}}
             type="number"
             className="sizeinput"
             placeholder="CS"
@@ -120,6 +124,7 @@ const ShopLeft = () => {
           />
           <div className="updown"></div>
           <input
+          style={{backgroundColor:'#fff'}}
             type="number"
             className="sizeinput"
             placeholder="ID"
