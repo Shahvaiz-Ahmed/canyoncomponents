@@ -12,8 +12,7 @@ import { UserContext } from "../../UserContext";
 import axios from "axios";
 
 const accessToken =
-  "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiJodHRwczovL2FwaS5idXNpbmVzc2NlbnRyYWwuZHluYW1pY3MuY29tIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0LyIsImlhdCI6MTY4OTI1MzU2NywibmJmIjoxNjg5MjUzNTY3LCJleHAiOjE2ODkyNTc0NjcsImFpbyI6IkUyWmdZQWplekdlVzZocmxmT3BtOEVWOU8va0dBQT09IiwiYXBwaWQiOiI2ODE0N2NmZS1kNDcyLTQ3ODgtYTlhYy03YWE4MDQyNDlhOTYiLCJhcHBpZGFjciI6IjEiLCJpZHAiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC80ZTk0ZjA2Zi1kYjAxLTQ3ZWItYWZmMy03YTI4NGIwMWRkODQvIiwiaWR0eXAiOiJhcHAiLCJvaWQiOiI3YTA2ZjFjYi0xOGMyLTRkY2ItOTQ3OS1kOTU4YTk4YzM0MWUiLCJyaCI6IjAuQVVZQWJfQ1VUZ0hiNjBldjgzb29Td0hkaEQzdmJabHNzMU5CaGdlbV9Ud0J1SjlHQUFBLiIsInJvbGVzIjpbIkF1dG9tYXRpb24uUmVhZFdyaXRlLkFsbCIsImFwcF9hY2Nlc3MiLCJBZG1pbkNlbnRlci5SZWFkV3JpdGUuQWxsIiwiQVBJLlJlYWRXcml0ZS5BbGwiXSwic3ViIjoiN2EwNmYxY2ItMThjMi00ZGNiLTk0NzktZDk1OGE5OGMzNDFlIiwidGlkIjoiNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0IiwidXRpIjoiNEx0eHJrTy1PRXFzS19KWi1ob1VBQSIsInZlciI6IjEuMCJ9.KHpWvMK8BNEAWw6M6rPGdpfvb79ADY3xZuv4qn9sZEaeLQm4Qvq8Vconqx1TWHNcDUSXU2VVlhLCbLrMxJiNJnZ6eGXSdGiafkJlzd4rq1-n4MfL9UMxMf20F0Se7hE4fHQskyNc9M7hizBOg8-cBnnXh75wu3D8LcrNB82bZNc6d1vAgNCS4mjpCaQ00iKeAmU773SsiOwPWUdTV31r6ffo1H4soP0HVY5VWw47OxOssTQBstWbMDsihppFI-Dxfj0iacQW5B1u5emUpq8xA2oAl6qdG9goY3AC1iTRbRJ0peWx_6nMdZ8cIdKxifWCuSIoCHHcQQcWTj2lVsRg8Q";
-
+"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiJodHRwczovL2FwaS5idXNpbmVzc2NlbnRyYWwuZHluYW1pY3MuY29tIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0LyIsImlhdCI6MTY4OTI2ODQ2OSwibmJmIjoxNjg5MjY4NDY5LCJleHAiOjE2ODkyNzIzNjksImFpbyI6IkUyWmdZUGd3czNGSm1sK1IxS3FpbFNjTHJ4V29BQUE9IiwiYXBwaWQiOiI2ODE0N2NmZS1kNDcyLTQ3ODgtYTlhYy03YWE4MDQyNDlhOTYiLCJhcHBpZGFjciI6IjEiLCJpZHAiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC80ZTk0ZjA2Zi1kYjAxLTQ3ZWItYWZmMy03YTI4NGIwMWRkODQvIiwiaWR0eXAiOiJhcHAiLCJvaWQiOiI3YTA2ZjFjYi0xOGMyLTRkY2ItOTQ3OS1kOTU4YTk4YzM0MWUiLCJyaCI6IjAuQVVZQWJfQ1VUZ0hiNjBldjgzb29Td0hkaEQzdmJabHNzMU5CaGdlbV9Ud0J1SjlHQUFBLiIsInJvbGVzIjpbIkF1dG9tYXRpb24uUmVhZFdyaXRlLkFsbCIsImFwcF9hY2Nlc3MiLCJBZG1pbkNlbnRlci5SZWFkV3JpdGUuQWxsIiwiQVBJLlJlYWRXcml0ZS5BbGwiXSwic3ViIjoiN2EwNmYxY2ItMThjMi00ZGNiLTk0NzktZDk1OGE5OGMzNDFlIiwidGlkIjoiNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0IiwidXRpIjoiXzktVW9qWllrMHliQzgwb0l5UktBQSIsInZlciI6IjEuMCJ9.eO3SzhfkMOd_-0xF1JiHa3aWmI0VzgighL8lRUCxUN9wu-CZuxlDaArf6SjCDhtmB4maA0XrjaIr9VNvaaou8k-b_vOfo9j_ppvQ0J927nECtrqI61__-KP23nRtUI3TIysYNax9dm8ZNNK547ysb_XNZsIV7gepf4SSQALGKBViCW_7ZJ-Dt_cIureNtqj_lnxR7lpJUyh5mDjLCkvPHCtnDJHd5ihT_i7XUeEbgitD5IzRKFTEB6Gf92bfr-wTXClHlQjqq31wwzEA_OBz3cdj7xD2GzzO6MgUQDiwoeZ8RjoXxt4Q6erYzAhg434TS5jjeJZ8FXwqg5rJ7NZJUQ";
 const duroScale = "Durometer Scale";
 
 function descendingComparator(a, b, orderBy) {
@@ -52,7 +51,7 @@ const columns = [
 
   
 
-  { id: "name", label: "Part No", minWidth: 130 },
+  { id: "name", label: "Part Number", minWidth: 130 },
 
   { id: "code", label: "Starting Price", minWidth: 30 },
 
@@ -386,13 +385,14 @@ export default function ItemDetails() {
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 580 }}>
         <Table stickyHeader aria-label="sticky table">
-          <TableHead>
+          <TableHead >
             <TableRow>
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  style={{ minWidth: column.minWidth, backgroundColor:'#182E49', color:'#fff', fontSize:'16px', fontWeight: '600' }}
+                 
                 >
                   {column.label}
                 </TableCell>
@@ -469,8 +469,8 @@ export default function ItemDetails() {
               .map((row, index) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                    <TableCell>{row.SearchDescription}</TableCell>
-                    <TableCell>{row.price ? row.price : "0"}</TableCell>
+                    <TableCell style={{ fontSize:'15px', fontWeight: '600' }}>{row.SearchDescription}</TableCell>
+                    <TableCell style={{ fontSize:'15px', fontWeight: '600' }}>{row.price ? row.price : "0"}</TableCell>
                     <TableCell
                       style={{
                         backgroundColor: row.qnty ? "green" : "red",
