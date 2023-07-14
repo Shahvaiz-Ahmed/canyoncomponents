@@ -1,0 +1,6 @@
+.MuiTableCell-head{
+    font-size: x-large;
+    font-weight: bolder;
+    color: white;
+    background-color: rgba(24, 46, 73, 1);
+}
