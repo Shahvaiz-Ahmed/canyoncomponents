@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext } from "react";
 
 export const UserContext = createContext();
 export const MyContextProvider = ({ children }) => {
@@ -24,3 +24,4 @@ export const MyContextProvider = ({ children }) => {
     </UserContext.Provider>
   );
 };
+export const UserContext = createContext(null)

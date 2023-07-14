@@ -6,21 +6,22 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { UserContext } from '../../UserContext';
 import VerifiedRoundedIcon from '@mui/icons-material/VerifiedRounded';
+import { useContext } from 'react';
 
 function createData(AvailableQuantity, LeadTimeToShip) {
   return { AvailableQuantity, LeadTimeToShip };
 }
 
-const rows = [
-  createData('342,435', <VerifiedRoundedIcon style={{
-    color: 'rgb(39, 255, 39)'
-  }} /> ),
-  createData('1234,5444', '3-7 days'),
-];
 
-export default function BasicTable() {
+
+export default function BasicTable(props) {
+  console.log(props.row);
+ 
+
   return (
+    
     <TableContainer component={Paper} sx={{ minWidth: 400, maxWidth: 500 }}>
       <Table sx={{ minWidth: 400, maxWidth: 600 }} aria-label="simple table">
         <TableHead>
@@ -30,20 +31,18 @@ export default function BasicTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+         
             <TableRow
-              key={row.name}
+              key={ props.row.ItemNo}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row.AvailableQuantity}
+                {props.row.qnty}
               </TableCell>
-              <TableCell align="right">{row.LeadTimeToShip}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell align="right">{props.row.LeadTimeToShip}</TableCell>
+            
             </TableRow>
-          ))}
+         
         </TableBody>
       </Table>
     </TableContainer>

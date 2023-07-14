@@ -23,9 +23,10 @@ import ColorExpand from "./ExpandableComponents/ColorExpand";
 import BrandExpand from "./ExpandableComponents/BrandExpand";
 // import dimensions from "../../Static/Dimensions.jpg";
 const ShopLeft = () => {
-  const { datax, updateData } = useContext(UserContext);
+  
 
   const [isCartopen, setisCartopen] = useState(null);
+<<<<<<< HEAD
   // const [selectedCountry, setSelectedCountry] = useState("");
   // const countries = ["USA", "Canada", "Mexico", "Brazil", "Japan"];
   // const [isopen, setisopen] = useState(false);
@@ -56,6 +57,38 @@ const ShopLeft = () => {
   const [isBrandExpanded, setisBrandExpanded] = useState(false);
 
   
+=======
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const countries = ["USA", "Canada", "Mexico", "Brazil", "Japan"];
+  const [isopen, setisopen] = useState(false);
+  const { setCs,setid,setsearch,setsize}=useContext(UserContext)
+  const handleCountryChange = (event) => {
+    setSelectedCountry(event.target.value);
+  };
+  const {accessToken}=useContext(UserContext)
+ 
+  const [arraydata, setArray] = useState([]);
+
+
+useEffect(()=>{
+  axios.get(
+    'https://api.businesscentral.dynamics.com/v2.0/4e94f06f-db01-47eb-aff3-7a284b01dd84/Sandbox/ODataV4/Company(%27My%20Company%27)/itemattributee',
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      params: {
+        $filter: "Name eq 'Material'",
+      },
+    }
+    ).then((res)=>{
+       const array = res.data.value[0].Values.split(",");
+        setArray(array);
+    }
+    )
+},[arraydata,accessToken])
+
+>>>>>>> origin/newbranch
   return (
     <Scrollbars style={{ width: "20vw", height: "100%", overflowX: "hidden" }}>
       <div
@@ -79,7 +112,7 @@ const ShopLeft = () => {
 
           <button
             className="search"
-            onClick={() => updateData({ ...datax, search: search })}
+            
           >
             Search
           </button>
@@ -201,6 +234,7 @@ const ShopLeft = () => {
         {isBmtExpanded ? "-" : "+"}
       </button>
         </div>
+<<<<<<< HEAD
         {
           isBmtExpanded?<BaseExpand />:<></>
         }
@@ -236,6 +270,19 @@ const ShopLeft = () => {
         }
        
         {/* <Compliance /> */}
+=======
+        <CheckboxList />
+        {/* <div className="flex">
+          <h2>Sub MATERIAL TYPE</h2>
+          <div className="hr"></div>
+        </div>
+        <SubMaterial/> */}
+        {/* <div className="flex">
+          <h2>Compliance</h2>
+          <div className="hr"></div>
+        </div>
+         <Compliance/>   */}
+>>>>>>> origin/newbranch
         <div className="flex">
           <h3 style={{marginRight: '2.0rem'}}>HARDNESS</h3>
           <button isTempExpanded={isTempExpanded}

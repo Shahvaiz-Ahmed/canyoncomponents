@@ -4,7 +4,9 @@ import { AiFillInfoCircle } from 'react-icons/ai';
 import { UserContext } from '../../UserContext';
 const CheckPrice = () => {
     const [isopen, setisopen] = useState(false)
-    const {setisCartopen,isCartopen}=useContext(UserContext);
+    const {setisCartopen,isCartopen , cartCountBtn, setcartCountBtn,
+        cartArray, setcartArray,}=useContext(UserContext);
+    const [isDisabled, setisDisabled] = useState(false)
     return (
         <div>
             <h2>Enter a quantity to Check Price</h2>
@@ -52,7 +54,10 @@ const CheckPrice = () => {
                             </tbody>
                         </table>
                         <hr />
-                        <button className='addtocart' onClick={()=>{setisCartopen(!isCartopen)}}>Add to Cart</button>
+                        <button disabled={isDisabled} className='addtocart' onClick={()=>{setisCartopen(!isCartopen)
+                        setcartCountBtn(cartCountBtn => cartCountBtn + 1);
+                        setisDisabled(true)
+                        }}>Add to Cart</button>
                         <div className="flex" style={{ marginTop: '2rem' }}>
                             <AiFillInfoCircle size={20} />
                             <p style={{ fontSize: '1.1rem' }} >Try increasing your qunatity for better value.</p>

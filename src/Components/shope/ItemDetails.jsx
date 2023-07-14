@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import Paper from "@mui/material/Paper";
+import {Link,useNavigate} from "react-router-dom";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -9,8 +10,9 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { UserContext } from "../../UserContext";
-import axios from "axios";
+import { useContext } from "react";
 
+<<<<<<< HEAD
 const accessToken =
   "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiJodHRwczovL2FwaS5idXNpbmVzc2NlbnRyYWwuZHluYW1pY3MuY29tIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0LyIsImlhdCI6MTY4OTMzNzAzOCwibmJmIjoxNjg5MzM3MDM4LCJleHAiOjE2ODkzNDA5MzgsImFpbyI6IkUyWmdZTmh3ZmZlclY0R3ZsUnUzRk53OE43ZHpGZ0E9IiwiYXBwaWQiOiI2ODE0N2NmZS1kNDcyLTQ3ODgtYTlhYy03YWE4MDQyNDlhOTYiLCJhcHBpZGFjciI6IjEiLCJpZHAiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC80ZTk0ZjA2Zi1kYjAxLTQ3ZWItYWZmMy03YTI4NGIwMWRkODQvIiwiaWR0eXAiOiJhcHAiLCJvaWQiOiI3YTA2ZjFjYi0xOGMyLTRkY2ItOTQ3OS1kOTU4YTk4YzM0MWUiLCJyaCI6IjAuQVVZQWJfQ1VUZ0hiNjBldjgzb29Td0hkaEQzdmJabHNzMU5CaGdlbV9Ud0J1SjlHQUFBLiIsInJvbGVzIjpbIkF1dG9tYXRpb24uUmVhZFdyaXRlLkFsbCIsImFwcF9hY2Nlc3MiLCJBZG1pbkNlbnRlci5SZWFkV3JpdGUuQWxsIiwiQVBJLlJlYWRXcml0ZS5BbGwiXSwic3ViIjoiN2EwNmYxY2ItMThjMi00ZGNiLTk0NzktZDk1OGE5OGMzNDFlIiwidGlkIjoiNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0IiwidXRpIjoidkl3QWdBdjZkVUNQVXZPTVVqQkVBQSIsInZlciI6IjEuMCJ9.on36XHlwYBjJVpMy_OHg0Qdcr2AIApGwmRFqCHCXA4KCVtwGBVoofMP0-HJqTV4a2Psz0zu0zFYeTZgLPFjCHYnZF2weyAa3Jyx3_pcpxEppSGiw8Nk0F7rqqfAtLKNiay7WsIvySjO17Gp54cdCpQYqHEpVe4-X7qviZGC2giKN7FSn0xiSGiQ549Sl07fUUwJ-WA01YLM1eM_Dc90Q8lU6NdZ41BDMDocTeK9TgjvUbbD5808xbxuLKZdRGBbGEEFOsmQo_i5uMjxwjb6v11_Ubv-WDz59lqZUNQGxqpS6vAgN6_FJMPn4KXbsSx2Mt7RKSXt-SagX0Z64ZRgkLg";
 const duroScale = "Durometer Scale";
@@ -30,22 +32,13 @@ function getComparator(order, orderBy) {
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
+=======
+>>>>>>> origin/newbranch
 
 // Since 2020 all major browsers ensure sort stability with Array.prototype.sort().
 // stableSort() brings sort stability to non-modern browsers (notably IE11). If you
 // only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
 // with exampleArray.slice().sort(exampleComparator)
-function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) {
-      return order;
-    }
-    return a[1] - b[1];
-  });
-  return stabilizedThis.map((el) => el[0]);
-}
 
 const columns = [
   { id: "name", label: "Part Number", minWidth: 130 },
@@ -197,189 +190,56 @@ const columns = [
   },
 ];
 
-function createData(name, code, population, size) {
-  const density = population / size;
 
-  return { name, code, population, size, density };
-}
 
-const rows = [
-  createData("India", "IN", 1324171354, 3287263),
-
-  createData("China", "CN", 1403500365, 9596961),
-
-  createData("Italy", "IT", 60483973, 301340),
-
-  createData("United States", "US", 327167434, 9833520),
-
-  createData("Canada", "CA", 37602103, 9984670),
-
-  createData("Australia", "AU", 25475400, 7692024),
-
-  createData("Germany", "DE", 83019200, 357578),
-
-  createData("Ireland", "IE", 4857000, 70273),
-
-  createData("Mexico", "MX", 126577691, 1972550),
-
-  createData("Japan", "JP", 126317000, 377973),
-
-  createData("France", "FR", 67022000, 640679),
-
-  createData("United Kingdom", "GB", 67545757, 242495),
-
-  createData("Russia", "RU", 146793744, 17098246),
-
-  createData("Nigeria", "NG", 200962417, 923768),
-
-  createData("Brazil", "BR", 210147125, 8515767),
-];
 
 export default function ItemDetails() {
-  const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("calories");
 
-  const { datax } = React.useContext(UserContext);
-  console.log(datax);
 
-  const [ItemDetails, setItemDetails] = useState();
+const navigate = useNavigate();
+const [page, setPage] = React.useState(0);
 
-  useEffect(() => {
-    return () => {
-      axios
-        .get(
-          "https://api.businesscentral.dynamics.com/v2.0/4e94f06f-db01-47eb-aff3-7a284b01dd84/Sandbox/ODataV4/Company('My%20Company')/ItemApi",
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        )
-        .then((res) => {
-          console.log(res.data.value);
-          setItemDetails(res.data.value);
+const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-          const items = ItemDetails;
+const handleChangePage = (event, newPage) => {
+  setPage(newPage);
+};
 
-          items.forEach((item) => {
-            const isSameProduct = item.ItemNo === previousItemNo;
-
-            previousItemNo = item.ItemNo;
-
-            if (!isSameProduct) {
-              if (currentProduct !== null) {
-                productArray.push(currentProduct);
-              }
-
-              currentProduct = {
-                ItemNo: item.ItemNo,
-
-                AttributeList: [],
-              };
-            }
-
-            const attribute = {
-              Description2: item.Description2,
-              SearchDescription: item.SearchDescription,
-            };
-
-            // Add the Compound Number as a key-value pair to the attribute object
-
-            const compoundNumberKey = item.AttributeName || "Compound Number";
-
-            attribute[compoundNumberKey] = item.AttributeValue;
-
-            currentProduct.AttributeList.push(attribute);
-          });
-
-          if (currentProduct !== null) {
-            productArray.push(currentProduct);
-          }
-          console.log(productArray);
-        })
-        .catch((err) => console.log(err));
-    };
-  }, []);
-
-  const items = ItemDetails;
-
-  let previousItemNo = null;
-
-  let productArray = [];
-
-  let currentProduct = null;
-
-  items?.forEach((item) => {
-    const isSameProduct = item.ItemNo === previousItemNo;
-
-    previousItemNo = item.ItemNo;
-
-    if (!isSameProduct) {
-      if (currentProduct !== null) {
-        productArray.push(currentProduct);
-      }
-
-      currentProduct = {
-        ItemNo: item.ItemNo,
-
-        qnty: item.Quantity,
-
-        price: item.UnitCost,
-
-        Description2: item.Description2,
-
-        SearchDescription: item.SearchDescription,
-      };
-    }
-
-    // Add the Compound Number as a key-value pair to the current product object
-
-    const compoundNumberKey =
-      item.AttributeName.replace(/\s/g, "").replace(/[^\w\s]/gi, "") ||
-      "CompoundNumber";
-
-    currentProduct[compoundNumberKey] = item.AttributeValue;
-  });
-
-  if (currentProduct !== null) {
-    productArray.push(currentProduct);
+const handleChangeRowsPerPage = (event) => {
+  setRowsPerPage(+event.target.value);
+  
+  setPage(0);
+};
+const handleClick = (data)=>{
+  navigate(`/product/${data}`);
+}
+const {item,setnumberofcecords,size,cs,id,selectedbrand,selectedmaterial,selectedhardness,selectedcolor}=useContext(UserContext);
+const filteredProducts = () => {
+  if (
+    selectedbrand ||
+    selectedcolor ||
+    selectedhardness ||
+    selectedmaterial ||
+    cs||id||size
+  ) {
+    return item?.filter((product) =>
+      product.Brand?.includes(selectedbrand) &&
+      product.Color?.includes(selectedcolor) &&
+      product.Durometer?.includes(selectedhardness) &&
+      product.Material?.includes(selectedmaterial)
+    ) || [];
   }
+  return item;
+};
+useEffect(() => {
+  return () => {
+    setnumberofcecords(filteredProducts().length)
+  }
+}, [filteredProducts])
 
-  console.log(productArray);
-
-  const [page, setPage] = React.useState(0);
-
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-
-    setPage(0);
-  };
-
-  const visibleRows = React.useMemo(
-    () =>
-      stableSort(productArray, getComparator(order, orderBy)).slice(
-        page * rowsPerPage,
-        page * rowsPerPage + rowsPerPage
-      ),
-    [order, orderBy, page, rowsPerPage, datax]
-  );
-  console.log(
-    visibleRows.filter(({ LowTemperatureC, HighTemperatureC }) => {
-      return (
-        LowTemperatureC === datax?.lowtemp &&
-        HighTemperatureC === datax?.hightemp
-      );
-    })
-  );
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+    <Paper sx={{ width: "100%", height: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 580 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -403,71 +263,9 @@ export default function ItemDetails() {
           </TableHead>
 
           <TableBody>
-            {console.log(
-              "hello",
-              visibleRows.filter((location) => {
-                if (
-                  datax?.search === "" &&
-                  datax?.lowtemp === "" &&
-                  datax?.hightemp === ""
-                ) {
-                  return visibleRows;
-                } else if (datax?.search === "") {
-                  if (datax?.lowtemp === "" && datax?.hightemp === "") {
-                    return visibleRows;
-                  } else {
-                    return (
-                      parseFloat(location?.LowTemperatureC) >= datax?.lowtemp &&
-                      parseFloat(location?.HighTemperatureC) <= datax?.hightemp
-                    );
-                  }
-                } else {
-                  return (
-                    location?.Color?.toLowerCase()?.includes(
-                      datax?.search?.toLowerCase()
-                    ) ||
-                    location?.Scale?.toLowerCase()?.includes(
-                      datax?.search?.toLowerCase()
-                    ) ||
-                    location?.Type?.toLowerCase()?.includes(
-                      datax?.search?.toLowerCase()
-                    )
-                  );
-                }
-              })
-            )}
-            {productArray
-              .filter((location) => {
-                if (
-                  datax?.search === "" &&
-                  datax?.lowtemp === "" &&
-                  datax?.hightemp === ""
-                ) {
-                  return productArray;
-                } else if (datax?.search === "") {
-                  if (datax?.lowtemp === "" && datax?.hightemp === "") {
-                    return productArray;
-                  } else {
-                    return (
-                      parseFloat(location?.LowTemperatureC) >= datax?.lowtemp &&
-                      parseFloat(location?.HighTemperatureC) <= datax?.hightemp
-                    );
-                  }
-                } else {
-                  return (
-                    location?.Color?.toLowerCase()?.includes(
-                      datax?.search?.toLowerCase()
-                    ) ||
-                    location?.Scale?.toLowerCase()?.includes(
-                      datax?.search?.toLowerCase()
-                    ) ||
-                    location?.Type?.toLowerCase()?.includes(
-                      datax?.search?.toLowerCase()
-                    )
-                  );
-                }
-              })
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+           
+           
+              {filteredProducts?filteredProducts().slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, index) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={index}>
@@ -477,6 +275,9 @@ export default function ItemDetails() {
                     <TableCell style={{ fontSize: "15px", fontWeight: "600" }}>
                       {row.price ? row.price : "0"}
                     </TableCell>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={index} onClick={() => handleClick(row.ItemNo)}>
+                 <TableCell style={{ fontSize:'15px', fontWeight: '600' }}>{row.SearchDescription}</TableCell>  
+                    <TableCell style={{ fontSize:'15px', fontWeight: '600' }}>{row.price ? row.price : "0"}</TableCell>
                     <TableCell
                       style={{
                         backgroundColor: row.qnty ? "green" : "red",
@@ -498,7 +299,7 @@ export default function ItemDetails() {
                     <TableCell>{row.LowTemperatureC}</TableCell>
                   </TableRow>
                 );
-              })}
+              }):<></>}
           </TableBody>
         </Table>
       </TableContainer>
@@ -506,7 +307,7 @@ export default function ItemDetails() {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={rows.length}
+        // count={item?.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
