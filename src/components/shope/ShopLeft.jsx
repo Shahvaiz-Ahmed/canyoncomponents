@@ -26,7 +26,6 @@ const ShopLeft = () => {
   
 
   const [isCartopen, setisCartopen] = useState(null);
-<<<<<<< HEAD
   // const [selectedCountry, setSelectedCountry] = useState("");
   // const countries = ["USA", "Canada", "Mexico", "Brazil", "Japan"];
   // const [isopen, setisopen] = useState(false);
@@ -34,6 +33,7 @@ const ShopLeft = () => {
   // const [cs, setCs] = useState(0);
   // const [id, setid] = useState(0);
   const [search, setsearch] = useState("");
+  const {datax, updateData } = useContext(UserContext)
   // const handleCountryChange = (event) => {
   //   setSelectedCountry(event.target.value);
   // };
@@ -57,38 +57,6 @@ const ShopLeft = () => {
   const [isBrandExpanded, setisBrandExpanded] = useState(false);
 
   
-=======
-  const [selectedCountry, setSelectedCountry] = useState("");
-  const countries = ["USA", "Canada", "Mexico", "Brazil", "Japan"];
-  const [isopen, setisopen] = useState(false);
-  const { setCs,setid,setsearch,setsize}=useContext(UserContext)
-  const handleCountryChange = (event) => {
-    setSelectedCountry(event.target.value);
-  };
-  const {accessToken}=useContext(UserContext)
- 
-  const [arraydata, setArray] = useState([]);
-
-
-useEffect(()=>{
-  axios.get(
-    'https://api.businesscentral.dynamics.com/v2.0/4e94f06f-db01-47eb-aff3-7a284b01dd84/Sandbox/ODataV4/Company(%27My%20Company%27)/itemattributee',
-    {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-      params: {
-        $filter: "Name eq 'Material'",
-      },
-    }
-    ).then((res)=>{
-       const array = res.data.value[0].Values.split(",");
-        setArray(array);
-    }
-    )
-},[arraydata,accessToken])
-
->>>>>>> origin/newbranch
   return (
     <Scrollbars style={{ width: "20vw", height: "100%", overflowX: "hidden" }}>
       <div
@@ -234,7 +202,6 @@ useEffect(()=>{
         {isBmtExpanded ? "-" : "+"}
       </button>
         </div>
-<<<<<<< HEAD
         {
           isBmtExpanded?<BaseExpand />:<></>
         }
@@ -270,21 +237,8 @@ useEffect(()=>{
         }
        
         {/* <Compliance /> */}
-=======
-        <CheckboxList />
-        {/* <div className="flex">
-          <h2>Sub MATERIAL TYPE</h2>
-          <div className="hr"></div>
-        </div>
-        <SubMaterial/> */}
-        {/* <div className="flex">
-          <h2>Compliance</h2>
-          <div className="hr"></div>
-        </div>
-         <Compliance/>   */}
->>>>>>> origin/newbranch
         <div className="flex">
-          <h3 style={{marginRight: '2.0rem'}}>HARDNESS</h3>
+          <h2 style={{marginRight: '2.0rem'}}>HARDNESS</h2>
           <button isTempExpanded={isTempExpanded}
         onClick={()=>{
           setisHardExpanded(!isHardExpanded);
@@ -300,7 +254,7 @@ useEffect(()=>{
 
         {/* <DurometerRange_Compliance /> */}
         <div className="flex">
-          <h3 style={{marginRight: '2.0rem'}}>COLOR</h3>
+          <h2 style={{marginRight: '2.0rem'}}>COLOR</h2>
           <button isTempExpanded={isTempExpanded}
         onClick={()=>{
           setisColExpanded(!isColExpanded);
@@ -316,7 +270,7 @@ useEffect(()=>{
         }
         {/* <Color /> */}
         <div className="flex">
-          <h3 style={{marginRight: '2.0rem'}}>BRAND</h3>
+          <h2 style={{marginRight: '2.0rem'}}>BRAND</h2>
           <button isTempExpanded={isTempExpanded}
         onClick={()=>{
           setisBrandExpanded(!isBrandExpanded);

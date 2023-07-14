@@ -32,7 +32,17 @@ function App() {
   const [DurometerRange_Compliance, setDurometerRange_Compliance] =
     useState(null);
   const [Brand, setBrand] = useState(null);
-
+  const [datax, setData] = useState({
+    search: "",
+    lowtemp: "",
+    hightemp: "",
+    color:"",
+    Material:"",
+    Compliance: "",
+    MaterialSubtype: "",
+    Brand: "",
+    Hardness: ""
+  });
   // const [Compliance, setCompliance] = useState(null)
 
   const [isCartopen, setisCartopen] = useState(false);
@@ -65,6 +75,9 @@ function App() {
     // const [material, setmaterial] = useState()
   const [item, setitem] = useState();
   const [numberofcecords, setnumberofcecords] = useState()
+  const updateData = (newData) => {
+    setData(newData);
+  };
   useEffect(() => {
     return () => {
       axios
@@ -157,6 +170,9 @@ function App() {
         Brand,
         setBrand,
         SubMaterial,
+        datax,
+        setData,
+        updateData,
         Color,
         DurometerRange_Compliance,
         setDurometerRange_Compliance,
