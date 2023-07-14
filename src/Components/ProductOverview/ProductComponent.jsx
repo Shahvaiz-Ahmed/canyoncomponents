@@ -41,7 +41,8 @@ function ProductComponent() {
        
         <p>Color: <span>{row.Color}</span> <span id='circleColor'></span> </p>
         <h4>{row.SizeStandard}<span></span> {row.CrossSectionalGeometry}<span></span> made from <span></span>{row.SearchDescription};a <span></span>{row.Durometer}
-         <span></span>{row.DurometerScale} a durometer <span></span>{row.Description2} . This material is <span></span>{row.Color}
+         <span></span>{row.DurometerScale} a durometer <span></span>{row.Description2} .
+          This material is <span></span>{row.Color}
          ,clean room manufactured encapsulated , High Temp,and Silicon Lubricated.
           </h4>
         <BasicTable row = {row}/>
@@ -67,7 +68,7 @@ function ProductComponent() {
         <RecomendedCard img={product} name='S1006-001' availability='In Stock' desc='CanRez™ CP75BK20 is our ultra high temperature FFKM. Ultra' />
       </div>
     </div>
-    <DetailedDesc/></>);
+    <DetailedDesc row={row}/></>);
       }):<></>}
   </div></Layout>
   )
