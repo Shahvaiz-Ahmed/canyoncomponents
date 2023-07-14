@@ -13,29 +13,42 @@ import SubMaterial from './SubMaterial'
 import DurometerRange_Compliance from './DurometerRange_Compliance'
 import { UserContext } from "../../UserContext";
 import ExpandableContent from "./ExpandableContent";
+import axios from 'axios'
 
 const ShopLeft = () => {
-  const { datax, updateData } = useContext(UserContext);
+  
 
   const [isCartopen, setisCartopen] = useState(null);
   const [selectedCountry, setSelectedCountry] = useState("");
   const countries = ["USA", "Canada", "Mexico", "Brazil", "Japan"];
   const [isopen, setisopen] = useState(false);
-  const [size, setsize] = useState(0);
-  const [cs, setCs] = useState(0);
-  const [id, setid] = useState(0);
-  const [search, setsearch] = useState("");
+  const { setCs,setid,setsearch,setsize}=useContext(UserContext)
   const handleCountryChange = (event) => {
     setSelectedCountry(event.target.value);
   };
-  const data = [
-    { id: 1, name: "Item 1" },
-    { id: 2, name: "Item 2" },
-    { id: 3, name: "Item 3" },
-  ];
-  useEffect(() => {
-    search === "" && updateData({ ...datax, search: search });
-  }, [search]);
+  const {accessToken}=useContext(UserContext)
+ 
+  const [arraydata, setArray] = useState([]);
+
+
+useEffect(()=>{
+  axios.get(
+    'https://api.businesscentral.dynamics.com/v2.0/4e94f06f-db01-47eb-aff3-7a284b01dd84/Sandbox/ODataV4/Company(%27My%20Company%27)/itemattributee',
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      params: {
+        $filter: "Name eq 'Material'",
+      },
+    }
+    ).then((res)=>{
+       const array = res.data.value[0].Values.split(",");
+        setArray(array);
+    }
+    )
+},[arraydata,accessToken])
+
   return (
     <Scrollbars style={{ width: "20vw", height: "100%", overflowX: "hidden" }}>
       <div
@@ -61,7 +74,7 @@ const ShopLeft = () => {
 
           <button
             className="search"
-            onClick={() => updateData({ ...datax, search: search })}
+            
           >
             Search
           </button>

@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 // import  { useState } from 'react';
 import "./App.css";
-import { MyContextProvider, UserContext } from "../src/UserContext";
+import {  UserContext } from "../src/UserContext";
 import { Routes, Route } from "react-router-dom";
 import Index from "./Components/Index";
 import RequestQuote from "./Components/REquestQutoe/RequestQuote";
 import SignIn from "./Components/Signin/signin";
 import Signup from "./Components/Signup/Signup";
 import Checkout from "./Components/CheckoutComponent/Checkout";
+import ProductComponent from "./Components/ProductOverview/ProductComponent.jsx"
 import CartPopup from "./Components/CartPage/CartPopup";
 import axios from "axios";
-
 // import CheckPrice from './Components/CheckPrice/CheckPrice';
 
 function App() {
@@ -18,6 +18,10 @@ function App() {
   const [sideMenuBarDropDown, setsideMenuBarDropDown] = useState(false);
   const [sideMenuBarDropDownIndex, setsideMenuBarDropDownIndex] =
     useState(false);
+  const [size, setsize] = useState(0);
+  const [cs, setCs] = useState(0);
+  const [id, setid] = useState(0);
+  const [search, setsearch] = useState("");
   // API DATA BELOW
   const [material, setmaterial] = useState(null);
   const [SubMaterial, setSubMaterial] = useState(null);
@@ -29,6 +33,7 @@ function App() {
   // const [Compliance, setCompliance] = useState(null)
 
   const [isCartopen, setisCartopen] = useState(false);
+ 
 
   // ITEM DETAILS API
   const [accessToken, setaccessToken] = useState()
@@ -43,7 +48,6 @@ function App() {
           let a=JSON.parse(res.data)
   
           setaccessToken(a.access_token);
-          console.log(a.access_token);
   
         })
   
@@ -53,15 +57,15 @@ function App() {
   
         });
   
-    }, [accessToken]);
+    }, []);
   
     // const [material, setmaterial] = useState()
-  const [ItemDetails, setItemDetails] = useState();
+  const [item, setitem] = useState();
   useEffect(() => {
     return () => {
       axios
         .get(
-          "https://api.businesscentral.dynamics.com/v2.0/4e94f06f-db01-47eb-aff3-7a284b01dd84/Sandbox/ODataV4/Company(%27My%20Company%27)/itemattributee",
+          "https://api.businesscentral.dynamics.com/v2.0/4e94f06f-db01-47eb-aff3-7a284b01dd84/Sandbox/ODataV4/Company(%27My%20Company%27)/ItemApi",
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -69,19 +73,67 @@ function App() {
           }
         )
         .then((res) => {
-          setItemDetails(res.data.value[0].Values.split(","));
-          console.log(ItemDetails);
-        });
-    };
-  }, [ItemDetails]);
+          const items=res.data.value;
+          console.log('hello',items);
+        
 
+        let previousItemNo = null;
+
+        let productArray = [];
+
+        let currentProduct = null;
+
+        items?.forEach((item) => {
+          const isSameProduct = item.ItemNo === previousItemNo;
+
+          previousItemNo = item.ItemNo;
+
+          if (!isSameProduct) {
+            if (currentProduct !== null) {
+              productArray.push(currentProduct);
+            }
+
+            currentProduct = {
+              ItemNo: item.ItemNo,
+
+              qnty: item.Quantity,
+
+              price: item.UnitCost,
+
+              Description2: item.Description2,
+
+              SearchDescription: item.SearchDescription,
+            };
+          }
+
+          // Add the Compound Number as a key-value pair to the current product object
+
+          const compoundNumberKey =
+            item.AttributeName.replace(/\s/g, "").replace(/[^\w\s]/gi, "") ||
+            "CompoundNumber";
+
+          currentProduct[compoundNumberKey] = item.AttributeValue;
+        });
+
+        if (currentProduct !== null) {
+          productArray.push(currentProduct);
+        }
+
+        setitem(productArray);
+              });
+    };
+  }, [item,accessToken]);
+  
   return (
     <UserContext.Provider
       value={{
+        setsize,
+        size,
+        cs,setCs,
+        id,setid,search,
         sideMenuBar,
         isCartopen,
-        ItemDetails,
-        setItemDetails,
+        item,
         Brand,
         setBrand,
         SubMaterial,
@@ -101,7 +153,7 @@ function App() {
         accessToken
       }}
     >
-      <MyContextProvider>
+       
         <Routes>
           <Route path="/" element={<Index />} />
           {/* <Route path='/' element={<CheckPrice/>}/> */}
@@ -110,8 +162,9 @@ function App() {
           <Route path="/request-quote" element={<RequestQuote />} />
           <Route path="/CartPopup" element={<CartPopup />} />
           <Route path="/Checkout" element={<Checkout />} />
+          <Route path="/product/:productid" element={<ProductComponent />} />
         </Routes>
-      </MyContextProvider>
+   
     </UserContext.Provider>
   );
 }

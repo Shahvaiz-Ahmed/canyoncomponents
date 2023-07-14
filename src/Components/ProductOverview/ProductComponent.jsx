@@ -6,19 +6,25 @@ import BasicTable from './BasicTable'
 // import Button from '@mui/material/Button';
 import RecomendedCard from './RecomendedCard';
 import DetailedDesc from './DetailedDesc/DetailedDesc';
-import Layout from '../Layout/Layout'
+import Layout from '../Layout/Layout';
 import CheckPrice from '../CheckPrice/CheckPrice';
 import CartPopup from '../CartPopup/CartPopup';
 import { UserContext } from '../../UserContext';
 
 function ProductComponent() {
+  const {item}= useContext(UserContext);
   
   const {isCartopen}=useContext(UserContext);
   return (
 
     <Layout><div className="productComponent ">
+      {item?item.map((row,index)=>{
+        return (
+          <>
     <div className="productDesc">
+
       <img src={product} alt="product" />
+      
       <div className="productInfo" >
         
         <h1>B100-010</h1>
@@ -47,7 +53,8 @@ function ProductComponent() {
         <RecomendedCard img={product} name='S1006-001' availability='In Stock' desc='CanRez™ CP75BK20 is our ultra high temperature FFKM. Ultra' />
       </div>
     </div>
-    <DetailedDesc/>
+    <DetailedDesc/></>);
+      }):<></>}
   </div></Layout>
   )
 }
