@@ -4,7 +4,6 @@ import "./css/shopleft.css";
 // import axios from 'axios'
 import { AiFillCaretDown } from "react-icons/ai";
 import CheckboxList from "./CheckboxeList";
-import dimensions from "../../Static/Dimensions.jpg";
 import SliderComponent from "./SliderComponent";
 import CartPopup from "../CartPopup/CartPopup";
 import Color from "./Color";
@@ -13,6 +12,7 @@ import Compliance from './Compliance'
 import SubMaterial from './SubMaterial'
 import DurometerRange_Compliance from './DurometerRange_Compliance'
 import { UserContext } from "../../UserContext";
+import ExpandableContent from "./ExpandableContent";
 
 const ShopLeft = () => {
   const { datax, updateData } = useContext(UserContext);
@@ -69,9 +69,8 @@ const ShopLeft = () => {
         {isCartopen && <CartPopup />}
         <div className="flex">
           <h2>DIMENSIONS(mm)</h2>
-          <div className="hr"></div>
+          <div className="hr"><ExpandableContent/></div>
         </div>
-        <img src={dimensions} alt="StandardImage" width={250} />
         <div className="flex">
           <h2>STANDARD SIZE</h2>
           <div className="hr"></div>
