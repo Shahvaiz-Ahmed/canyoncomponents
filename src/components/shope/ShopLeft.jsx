@@ -2,40 +2,60 @@ import React, { useContext, useState, useEffect } from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import "./css/shopleft.css";
 // import axios from 'axios'
-import { AiFillCaretDown } from "react-icons/ai";
+// import { AiFillCaretDown } from "react-icons/ai";
 import CheckboxList from "./CheckboxeList";
 import SliderComponent from "./SliderComponent";
 import CartPopup from "../CartPopup/CartPopup";
 import Color from "./Color";
-import Brand from './Brand'
-import Compliance from './Compliance'
-import SubMaterial from './SubMaterial'
-import DurometerRange_Compliance from './DurometerRange_Compliance'
+import Brand from "./Brand";
+import Compliance from "./Compliance";
+import SubMaterial from "./SubMaterial";
+import DurometerRange_Compliance from "./DurometerRange_Compliance";
 import { UserContext } from "../../UserContext";
-import ExpandableContent from "./ExpandableContent";
-
+import DimensionsExpand from "./ExpandableComponents/DimensionsExpand";
+import StandardExpand from "./ExpandableComponents/StandardExpand";
+import TempExpand from "./ExpandableComponents/TempExpand";
+import BaseExpand from "./ExpandableComponents/BaseExpand";
+import SubExpand from "./ExpandableComponents/SubExpand";
+import HardnessExpand from "./ExpandableComponents/HardnessExpand";
+import ComplianceExpand from "./ExpandableComponents/ComplianceExpand";
+import ColorExpand from "./ExpandableComponents/ColorExpand";
+import BrandExpand from "./ExpandableComponents/BrandExpand";
+// import dimensions from "../../Static/Dimensions.jpg";
 const ShopLeft = () => {
   const { datax, updateData } = useContext(UserContext);
 
   const [isCartopen, setisCartopen] = useState(null);
-  const [selectedCountry, setSelectedCountry] = useState("");
-  const countries = ["USA", "Canada", "Mexico", "Brazil", "Japan"];
-  const [isopen, setisopen] = useState(false);
-  const [size, setsize] = useState(0);
-  const [cs, setCs] = useState(0);
-  const [id, setid] = useState(0);
+  // const [selectedCountry, setSelectedCountry] = useState("");
+  // const countries = ["USA", "Canada", "Mexico", "Brazil", "Japan"];
+  // const [isopen, setisopen] = useState(false);
+  // const [size, setsize] = useState(0);
+  // const [cs, setCs] = useState(0);
+  // const [id, setid] = useState(0);
   const [search, setsearch] = useState("");
-  const handleCountryChange = (event) => {
-    setSelectedCountry(event.target.value);
-  };
-  const data = [
-    { id: 1, name: "Item 1" },
-    { id: 2, name: "Item 2" },
-    { id: 3, name: "Item 3" },
-  ];
+  // const handleCountryChange = (event) => {
+  //   setSelectedCountry(event.target.value);
+  // };
+  // const data = [
+  //   { id: 1, name: "Item 1" },
+  //   { id: 2, name: "Item 2" },
+  //   { id: 3, name: "Item 3" },
+  // ];
   useEffect(() => {
     search === "" && updateData({ ...datax, search: search });
   }, [search]);
+
+  const [isDimExpanded, setisDimExpanded] = useState(false);
+  const [isStdExpanded, setisStdExpanded] = useState(false);
+  const [isTempExpanded, setisTempExpanded] = useState(false);
+  const [isBmtExpanded, setisBmtExpanded] = useState(false);
+  const [isSmtExpanded, setisSmtExpanded] = useState(false);
+  const [isCompExpanded, setisCompExpanded] = useState(false);
+  const [isHardExpanded, setisHardExpanded] = useState(false);
+  const [isColExpanded, setisColExpanded] = useState(false);
+  const [isBrandExpanded, setisBrandExpanded] = useState(false);
+
+  
   return (
     <Scrollbars style={{ width: "20vw", height: "100%", overflowX: "hidden" }}>
       <div
@@ -45,8 +65,6 @@ const ShopLeft = () => {
         }}
       >
         <div className="flex">
-          <h2>KEYWORD</h2>
-          <div className="hr"></div>
         </div>
         <div className="keywordSearch">
           <div>
@@ -54,7 +72,7 @@ const ShopLeft = () => {
               type="text"
               placeholder="Search Here"
               className="searchinput"
-              style={{backgroundColor: '#fff'}}
+              style={{ backgroundColor: "#fff", height: "2.5rem" }}
               onChange={(e) => setsearch(e.target.value)}
             />
           </div>
@@ -67,21 +85,43 @@ const ShopLeft = () => {
           </button>
         </div>
         {isCartopen && <CartPopup />}
-        <div className="flex">
-          <h2>DIMENSIONS(mm)</h2>
-          <div className="hr"><ExpandableContent/></div>
+        <div className="flex" >
+        <h2 >DIMENSIONS(mm)</h2>
+        <button  style={{marginLeft: '2rem'}}
+        onClick={()=>{
+          setisDimExpanded(!isDimExpanded);
+        }}
+      >
+        {isDimExpanded ? "-" : "+"}
+      </button>
         </div>
+        {
+          isDimExpanded? <DimensionsExpand />:<></>
+        }
+
+        
+        {/* <img src={dimensions} alt="StandardImage" width={250} /> */}
         <div className="flex">
-          <h2>STANDARD SIZE</h2>
-          <div className="hr"></div>
+          <h2 >STANDARD SIZE</h2>
+          <button  style={{marginLeft: '3.8rem'}} isTempExpanded={isTempExpanded}
+        onClick={()=>{
+          setisStdExpanded(!isStdExpanded);
+        }}
+      >
+        {isStdExpanded ? "-" : "+"}
+      </button>
         </div>
-        <p>Standard Size:</p>
+        {
+          isStdExpanded? <StandardExpand />:<></>
+        }
+        
+        {/* <p>Standard Size:</p>
 
         <div className="p1">
           <select
             value={selectedCountry}
             className="country"
-            style={{backgroundColor:'#fff'}}
+            style={{ backgroundColor: "#fff", height: "2.5rem" }}
             onChange={handleCountryChange}
           >
             <option value="">Select Country</option>
@@ -100,7 +140,7 @@ const ShopLeft = () => {
           />
 
           <input
-          style={{backgroundColor:'#fff'}}
+            style={{ backgroundColor: "#fff", marginLeft: "-2rem" }}
             type="text"
             className="sizeinput"
             placeholder="Size"
@@ -112,7 +152,7 @@ const ShopLeft = () => {
           <div className="updown"></div>
 
           <input
-          style={{backgroundColor:'#fff'}}
+            style={{ backgroundColor: "#fff" }}
             type="number"
             className="sizeinput"
             placeholder="CS"
@@ -123,7 +163,7 @@ const ShopLeft = () => {
           />
           <div className="updown"></div>
           <input
-          style={{backgroundColor:'#fff'}}
+            style={{ backgroundColor: "#fff" }}
             type="number"
             className="sizeinput"
             placeholder="ID"
@@ -133,43 +173,116 @@ const ShopLeft = () => {
             }}
           />
           <div className="updown"></div>
-        </div>
+        </div> */}
         {/* <SliderComponent /> */}
         <div className="flex">
-          <h2>TEMPRATURE &deg; C</h2>
-          <div className="hr"></div>
+          <h2 style={{marginRight: '2.0rem'}}>TEMPRATURE &deg; C</h2>
+          <button  style={{marginLeft: '1.2rem'}} isTempExpanded={isTempExpanded}
+        onClick={()=>{
+          setisTempExpanded(!isTempExpanded);
+        }}
+      >
+        {isTempExpanded ? "-" : "+"}
+      </button>
         </div>
-        <SliderComponent />
+        {
+          isTempExpanded? <TempExpand />:<></>
+        }
+
+        
+        {/* <SliderComponent /> */}
         <div className="flex">
-          <h2>BASE MATERIAL TYPE</h2>
-          <div className="hr"></div>
+          <h2 >BASE MATERIAL TYPE</h2>
+          <button   isTempExpanded={isTempExpanded}
+        onClick={()=>{
+          setisBmtExpanded(!isBmtExpanded);
+        }}
+      >
+        {isBmtExpanded ? "-" : "+"}
+      </button>
         </div>
-        <CheckboxList />
+        {
+          isBmtExpanded?<BaseExpand />:<></>
+        }
+        
+        {/* <CheckboxList /> */}
         <div className="flex">
-          <h2>Sub MATERIAL TYPE</h2>
-          <div className="hr"></div>
+          <h2 >SUB MATERIAL TYPE</h2>
+          <button  style={{marginLeft: '1rem'}} isTempExpanded={isTempExpanded}
+        onClick={()=>{
+          setisSmtExpanded(!isSmtExpanded);
+        }}
+      >
+        {isSmtExpanded ? "-" : "+"}
+      </button>
         </div>
-        <SubMaterial/>
+        {
+          isSmtExpanded? <SubExpand />:<></>
+        }
+        
+        {/* <SubMaterial /> */}
         <div className="flex">
-          <h2>Compliance</h2>
-          <div className="hr"></div>
+          <h2 style={{marginRight: '2.0rem'}}>COMPLIANCE</h2>
+          <button isTempExpanded={isTempExpanded}
+        onClick={()=>{
+          setisCompExpanded(!isCompExpanded);
+        }}
+      >
+        {isCompExpanded ? "-" : "+"}
+      </button>
         </div>
-         <Compliance/>  
+        {
+          isCompExpanded?  <ComplianceExpand />:<></>
+        }
+       
+        {/* <Compliance /> */}
         <div className="flex">
-          <h2>Hardness</h2>
-          <div className="hr"></div>
+          <h3 style={{marginRight: '2.0rem'}}>HARDNESS</h3>
+          <button isTempExpanded={isTempExpanded}
+        onClick={()=>{
+          setisHardExpanded(!isHardExpanded);
+        }}
+      >
+        {isHardExpanded ? "-" : "+"}
+      </button>
         </div>
-        <DurometerRange_Compliance/> 
+        {
+          isHardExpanded?         <HardnessExpand />
+          :<></>
+        }
+
+        {/* <DurometerRange_Compliance /> */}
         <div className="flex">
-          <h2>Color</h2>
-          <div className="hr"></div>
+          <h3 style={{marginRight: '2.0rem'}}>COLOR</h3>
+          <button isTempExpanded={isTempExpanded}
+        onClick={()=>{
+          setisColExpanded(!isColExpanded);
+        }}
+      >
+        {isColExpanded ? "-" : "+"}
+      </button>
         </div>
-         <Color/> 
+        {
+          isColExpanded?                 <ColorExpand />
+
+          :<></>
+        }
+        {/* <Color /> */}
         <div className="flex">
-          <h2>Brand</h2>
-          <div className="hr"></div>
+          <h3 style={{marginRight: '2.0rem'}}>BRAND</h3>
+          <button isTempExpanded={isTempExpanded}
+        onClick={()=>{
+          setisBrandExpanded(!isBrandExpanded);
+        }}
+      >
+        {isBrandExpanded ? "-" : "+"}
+      </button>
         </div>
-        <Brand/>
+        {
+          isBrandExpanded?         <BrandExpand />
+          :<></>
+        }
+        {/* <Brand /> */}
       </div>
     </Scrollbars>
   );

@@ -6,7 +6,12 @@ export const MyContextProvider = ({ children }) => {
     search: "",
     lowtemp: "",
     hightemp: "",
-    color:""
+    color:"",
+    Material:"",
+    Compliance: "",
+    MaterialSubtype: "",
+    Brand: "",
+    Hardness: ""
   }); // Initialize the data state
 
   const updateData = (newData) => {

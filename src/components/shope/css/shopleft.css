@@ -1,4 +1,5 @@
 .main {
+  position: relative;
   color: black;
   width: 20vw;
   align-items: first baseline;
@@ -6,40 +7,50 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
+  padding-left: 2rem;
+  padding-top: 1.2rem;
   /* overflow-y: scroll; */
   }
 .search{
-    width: 15vw;
-    background-color: #0C1725;
+    background-color: #182E49;
+    font-weight: bolder;
     color:white ;
-    
     border-radius: 0.5vw;
-    height: 3vh;
-    margin-top: 2vh;
+    height: 5vh;
     margin-left: 0.1vw;
+    display: flex;
+    flex: 3;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem !important;
   }
 .searchinput{
-    width: 15vw;
     height: 3vh;
-    background-color: aliceblue;
+    border-radius: 0.5rem;
+    padding-left: 1rem;
   }
-/*   
-    .hr {
+ 
+     /* .hr {
       width: 1.5vw;
       height: 0.5vh;
       margin-top: 35px;
       background-color: #F5976B;
-    } */
+    }   */
 
 .flex {
   display: flex;
   margin-left: 0px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
  
 }
+
 .keywordSearch {
+  width: 55%;
     display: flex;
-      flex-direction: column;
       align-items: center;
+      justify-content: space-between;
     }
 .country{
   width: 15vw;

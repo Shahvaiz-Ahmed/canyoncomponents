@@ -12,7 +12,7 @@ import { UserContext } from "../../UserContext";
 import axios from "axios";
 
 const accessToken =
-"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiJodHRwczovL2FwaS5idXNpbmVzc2NlbnRyYWwuZHluYW1pY3MuY29tIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0LyIsImlhdCI6MTY4OTMwNjE3MiwibmJmIjoxNjg5MzA2MTcyLCJleHAiOjE2ODkzMTAwNzIsImFpbyI6IkUyWmdZUGgyWklPZHRORCtpMWRtWjRYdjR4Vm9CUUE9IiwiYXBwaWQiOiI2ODE0N2NmZS1kNDcyLTQ3ODgtYTlhYy03YWE4MDQyNDlhOTYiLCJhcHBpZGFjciI6IjEiLCJpZHAiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC80ZTk0ZjA2Zi1kYjAxLTQ3ZWItYWZmMy03YTI4NGIwMWRkODQvIiwiaWR0eXAiOiJhcHAiLCJvaWQiOiI3YTA2ZjFjYi0xOGMyLTRkY2ItOTQ3OS1kOTU4YTk4YzM0MWUiLCJyaCI6IjAuQVVZQWJfQ1VUZ0hiNjBldjgzb29Td0hkaEQzdmJabHNzMU5CaGdlbV9Ud0J1SjlHQUFBLiIsInJvbGVzIjpbIkF1dG9tYXRpb24uUmVhZFdyaXRlLkFsbCIsImFwcF9hY2Nlc3MiLCJBZG1pbkNlbnRlci5SZWFkV3JpdGUuQWxsIiwiQVBJLlJlYWRXcml0ZS5BbGwiXSwic3ViIjoiN2EwNmYxY2ItMThjMi00ZGNiLTk0NzktZDk1OGE5OGMzNDFlIiwidGlkIjoiNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0IiwidXRpIjoiNG43U2Q1Vjg0RWVwQS1yVXBkQXZBQSIsInZlciI6IjEuMCJ9.AL5AygUOsSXtDJPe1ULTCZv7YUM90xmQ6pGWre7XHHYvEaEJtOUzqobc5i2sQE8lTMLB8zGeEUI9gekrqlE_KMbVZSQYN_fKGnayYBJzRXic_hXthjsEd1VXIx3i4EYCCinBc2m1vYgSIfCgPZXPjzMawZQTHLIatvcgTUpJsNpcGLyrmpplMa7iCLfmh4z_P0rPs_RAv-m5iOndUDoObAHQaRLCuwmsm_HN5XrZoFsLlMO4G56OVT3s8K90Mx5j-gW-lUKd-jutwL1_eEaC4YJ4Fbr-QN4BzKLwXMK1WliF77n8CXMiy7qi4srRTwyI0jjRwTLu9ArsN0Qa0sSxMg";
+  "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiJodHRwczovL2FwaS5idXNpbmVzc2NlbnRyYWwuZHluYW1pY3MuY29tIiwiaXNzIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0LyIsImlhdCI6MTY4OTMzNzAzOCwibmJmIjoxNjg5MzM3MDM4LCJleHAiOjE2ODkzNDA5MzgsImFpbyI6IkUyWmdZTmh3ZmZlclY0R3ZsUnUzRk53OE43ZHpGZ0E9IiwiYXBwaWQiOiI2ODE0N2NmZS1kNDcyLTQ3ODgtYTlhYy03YWE4MDQyNDlhOTYiLCJhcHBpZGFjciI6IjEiLCJpZHAiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC80ZTk0ZjA2Zi1kYjAxLTQ3ZWItYWZmMy03YTI4NGIwMWRkODQvIiwiaWR0eXAiOiJhcHAiLCJvaWQiOiI3YTA2ZjFjYi0xOGMyLTRkY2ItOTQ3OS1kOTU4YTk4YzM0MWUiLCJyaCI6IjAuQVVZQWJfQ1VUZ0hiNjBldjgzb29Td0hkaEQzdmJabHNzMU5CaGdlbV9Ud0J1SjlHQUFBLiIsInJvbGVzIjpbIkF1dG9tYXRpb24uUmVhZFdyaXRlLkFsbCIsImFwcF9hY2Nlc3MiLCJBZG1pbkNlbnRlci5SZWFkV3JpdGUuQWxsIiwiQVBJLlJlYWRXcml0ZS5BbGwiXSwic3ViIjoiN2EwNmYxY2ItMThjMi00ZGNiLTk0NzktZDk1OGE5OGMzNDFlIiwidGlkIjoiNGU5NGYwNmYtZGIwMS00N2ViLWFmZjMtN2EyODRiMDFkZDg0IiwidXRpIjoidkl3QWdBdjZkVUNQVXZPTVVqQkVBQSIsInZlciI6IjEuMCJ9.on36XHlwYBjJVpMy_OHg0Qdcr2AIApGwmRFqCHCXA4KCVtwGBVoofMP0-HJqTV4a2Psz0zu0zFYeTZgLPFjCHYnZF2weyAa3Jyx3_pcpxEppSGiw8Nk0F7rqqfAtLKNiay7WsIvySjO17Gp54cdCpQYqHEpVe4-X7qviZGC2giKN7FSn0xiSGiQ549Sl07fUUwJ-WA01YLM1eM_Dc90Q8lU6NdZ41BDMDocTeK9TgjvUbbD5808xbxuLKZdRGBbGEEFOsmQo_i5uMjxwjb6v11_Ubv-WDz59lqZUNQGxqpS6vAgN6_FJMPn4KXbsSx2Mt7RKSXt-SagX0Z64ZRgkLg";
 const duroScale = "Durometer Scale";
 
 function descendingComparator(a, b, orderBy) {
@@ -48,9 +48,6 @@ function stableSort(array, comparator) {
 }
 
 const columns = [
-
-  
-
   { id: "name", label: "Part Number", minWidth: 130 },
 
   { id: "code", label: "Starting Price", minWidth: 30 },
@@ -385,14 +382,19 @@ export default function ItemDetails() {
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 580 }}>
         <Table stickyHeader aria-label="sticky table">
-          <TableHead >
+          <TableHead>
             <TableRow>
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth, backgroundColor:'#182E49', color:'#fff', fontSize:'16px', fontWeight: '600' }}
-                 
+                  style={{
+                    minWidth: column.minWidth,
+                    backgroundColor: "#182E49",
+                    color: "#fff",
+                    fontSize: "16px",
+                    fontWeight: "600",
+                  }}
                 >
                   {column.label}
                 </TableCell>
@@ -469,11 +471,16 @@ export default function ItemDetails() {
               .map((row, index) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={index}>
-                    <TableCell style={{ fontSize:'15px', fontWeight: '600' }}>{row.SearchDescription}</TableCell>
-                    <TableCell style={{ fontSize:'15px', fontWeight: '600' }}>{row.price ? row.price : "0"}</TableCell>
+                    <TableCell style={{ fontSize: "15px", fontWeight: "600" }}>
+                      {row.SearchDescription}
+                    </TableCell>
+                    <TableCell style={{ fontSize: "15px", fontWeight: "600" }}>
+                      {row.price ? row.price : "0"}
+                    </TableCell>
                     <TableCell
                       style={{
                         backgroundColor: row.qnty ? "green" : "red",
+                        color: "#fff",
                       }}
                     >
                       {row.qnty ? "IN STOCK" : "OUT OF STOCK"}
@@ -482,10 +489,10 @@ export default function ItemDetails() {
                     <TableCell>{row.Color}</TableCell>
                     <TableCell>{row.Durometer}</TableCell>
                     <TableCell>{row.DurometerScale}</TableCell>
-                    <TableCell>{row.MaterialSubtype}</TableCell>
+                    <TableCell>{row.CrossSectionalGeometry}</TableCell>
                     <TableCell>{row.SizeStandard}</TableCell>
-                    <TableCell>{row.Description2}</TableCell>
-                    <TableCell>{row.Description2}</TableCell>
+                    <TableCell>{row.CrossSectionalDiameterCS}</TableCell>
+                    <TableCell>{row.InsideDiameterID}</TableCell>
                     <TableCell>{row.Description2}</TableCell>
                     <TableCell>{row.HighTemperatureC}</TableCell>
                     <TableCell>{row.LowTemperatureC}</TableCell>

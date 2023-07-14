@@ -63,7 +63,8 @@ const ShopRight = () => {
       <div className="row1" style={{
         "width":"100vw"
       }}>
-        <h1 >408,426 Results</h1>
+        
+        <h2>408,426 Results</h2>
         {
       search ? (
         <div className='searchfields'>
@@ -75,6 +76,8 @@ const ShopRight = () => {
         </div>
       ) : null
     }
+
+    
   
       
       </div >
