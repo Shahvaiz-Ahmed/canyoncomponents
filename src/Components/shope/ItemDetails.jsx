@@ -484,7 +484,7 @@ export default function ItemDetails() {
                     <TableCell>{row.DurometerScale}</TableCell>
                     <TableCell>{row.MaterialSubtype}</TableCell>
                     <TableCell>{row.SizeStandard}</TableCell>
-                    <TableCell>{row.Description2.split(",")[1]?row.Description2.split(",")[1].split("X")[0].split(":")[1]:''}</TableCell>
+                    <TableCell>{row.Description2</TableCell>
                     <TableCell>{row.Description2.split(",")[1]?row.Description2.split(",")[1].split("X")[1].split(":")[1]:''}</TableCell>
                     <TableCell>{row.Description2}</TableCell>
                     <TableCell>{row.HighTemperatureC}</TableCell>

@@ -23,13 +23,13 @@
     height: 3vh;
     background-color: aliceblue;
   }
-  
+/*   
     .hr {
       width: 1.5vw;
       height: 0.5vh;
       margin-top: 35px;
       background-color: #F5976B;
-    }
+    } */
 
 .flex {
   display: flex;
