@@ -9,16 +9,26 @@ import DetailedDesc from './DetailedDesc/DetailedDesc';
 import Layout from '../Layout/Layout';
 import CheckPrice from '../CheckPrice/CheckPrice';
 import CartPopup from '../CartPopup/CartPopup';
+import { useParams } from 'react-router-dom';
 import { UserContext } from '../../UserContext';
 
 function ProductComponent() {
+  const { productid } = useParams();
+  console.log(productid);
+
   const {item}= useContext(UserContext);
+  console.log(item);
   
   const {isCartopen}=useContext(UserContext);
+  const filteredRows = item.filter((row, index) => {
+    return row.ItemNo === productid;
+  });
+  console.log(filteredRows);
+  
   return (
 
     <Layout><div className="productComponent ">
-      {item?item.map((row,index)=>{
+      {filteredRows?filteredRows.map((row,index)=>{
         return (
           <>
     <div className="productDesc">
@@ -27,10 +37,14 @@ function ProductComponent() {
       
       <div className="productInfo" >
         
-        <h1>B100-010</h1>
-        <h4>CanRez™ CP75BK20 is our ultra high temperature FFKM. Ultra low compression set & capable of excursions to 350°C. Compare Kalrez 7075.</h4>
-        <p>Color: <span>Black</span> <span id='circleColor'></span> </p>
-        <BasicTable/>
+        <h1>{row.SearchDescription}</h1>
+       
+        <p>Color: <span>{row.Color}</span> <span id='circleColor'></span> </p>
+        <h4>{row.SizeStandard}<span></span> {row.CrossSectionalGeometry}<span></span> made from <span></span>{row.SearchDescription};a <span></span>{row.Durometer}
+         <span></span>{row.DurometerScale} a durometer <span></span>{row.Description2} . This material is <span></span>{row.Color}
+         ,clean room manufactured encapsulated , High Temp,and Silicon Lubricated.
+          </h4>
+        <BasicTable row = {row}/>
         {/* <div className="checkPriceQuantity">
           <h5>Enter a Quantity to Check Price</h5>
           <div id='checkQuantity' >  
@@ -39,9 +53,9 @@ function ProductComponent() {
           </div>
         </div> */}
         <CheckPrice/>
-        {
+        {/* {
         isCartopen&&<CartPopup/>
-      }
+      } */}
       </div>
     </div>
     <div className="recomendedProducts">
