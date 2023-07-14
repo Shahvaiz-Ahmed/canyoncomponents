@@ -178,25 +178,41 @@ export default function ItemDetails() {
 
 
 const navigate = useNavigate();
-  const {item}=useContext(UserContext);
-  console.log(item?item:'');
-  const [page, setPage] = React.useState(0);
+const [page, setPage] = React.useState(0);
 
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+const handleChangePage = (event, newPage) => {
+  setPage(newPage);
+};
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-
-    setPage(0);
-  };
-  const handleClick = (data)=>{
-    navigate(`/product/${data}`);
+const handleChangeRowsPerPage = (event) => {
+  setRowsPerPage(+event.target.value);
+  
+  setPage(0);
+};
+const handleClick = (data)=>{
+  navigate(`/product/${data}`);
+}
+const {item,size,cs,id,selectedbrand,selectedmaterial,selectedhardness,selectedcolor}=useContext(UserContext);
+const filteredProducts = () => {
+  if (
+    selectedbrand ||
+    selectedcolor ||
+    selectedhardness ||
+    selectedmaterial 
+    // cs||id||size
+  ) {
+    return item?.filter((product) =>
+      product.Brand?.includes(selectedbrand) &&
+     
+      product.Color?.includes(selectedcolor) &&
+      product.Durometer?.includes(selectedhardness) &&
+      product.Material?.includes(selectedmaterial)
+    ) || [];
   }
- 
+  return item;
+};
 
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -220,7 +236,7 @@ const navigate = useNavigate();
           <TableBody>
            
            
-              {item?item.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              {filteredProducts?filteredProducts().slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, index) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={index} onClick={() => handleClick(row.ItemNo)}>
