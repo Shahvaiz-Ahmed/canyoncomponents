@@ -194,18 +194,17 @@ const handleChangeRowsPerPage = (event) => {
 const handleClick = (data)=>{
   navigate(`/product/${data}`);
 }
-const {item,size,cs,id,selectedbrand,selectedmaterial,selectedhardness,selectedcolor}=useContext(UserContext);
+const {item,setnumberofcecords,size,cs,id,selectedbrand,selectedmaterial,selectedhardness,selectedcolor}=useContext(UserContext);
 const filteredProducts = () => {
   if (
     selectedbrand ||
     selectedcolor ||
     selectedhardness ||
-    selectedmaterial 
-    // cs||id||size
+    selectedmaterial ||
+    cs||id||size
   ) {
     return item?.filter((product) =>
       product.Brand?.includes(selectedbrand) &&
-     
       product.Color?.includes(selectedcolor) &&
       product.Durometer?.includes(selectedhardness) &&
       product.Material?.includes(selectedmaterial)
@@ -213,9 +212,15 @@ const filteredProducts = () => {
   }
   return item;
 };
+useEffect(() => {
+  return () => {
+    setnumberofcecords(filteredProducts().length)
+  }
+}, [filteredProducts])
+
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+    <Paper sx={{ width: "100%", height: "100%", overflow: "hidden" }}>
       <TableContainer sx={{ maxHeight: 580 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead >
@@ -255,9 +260,8 @@ const filteredProducts = () => {
                     <TableCell>{row.DurometerScale}</TableCell>
                     <TableCell>{row.MaterialSubtype}</TableCell>
                     <TableCell>{row.SizeStandard}</TableCell>
-                    <TableCell>{row.CrossSectionalDiameterCS
-}</TableCell>
-                    <TableCell>{row.InsideDiameterID}</TableCell>
+                    <TableCell>{row.Description2}</TableCell>
+                    <TableCell>{row.Description2}</TableCell>
                     <TableCell>{row.Description2}</TableCell>
                     <TableCell>{row.HighTemperatureC}</TableCell>
                     <TableCell>{row.LowTemperatureC}</TableCell>

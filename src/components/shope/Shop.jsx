@@ -37,7 +37,7 @@ const [isMobileView, setIsMobileView] = useState(false);
 
   return (
     
-    <div className="row">
+    <div className="row" style={{height:"100vh"}}>
       <div>
         {isMobileView ? (
         

@@ -64,6 +64,7 @@ function App() {
   
     // const [material, setmaterial] = useState()
   const [item, setitem] = useState();
+  const [numberofcecords, setnumberofcecords] = useState()
   useEffect(() => {
     return () => {
       axios
@@ -122,6 +123,7 @@ function App() {
         }
 
         setitem(productArray);
+
         console.log(productArray);
               });
     };
@@ -132,6 +134,8 @@ function App() {
   return (
     <UserContext.Provider
       value={{
+        numberofcecords,
+        setnumberofcecords,
         selectedhardness,
         setselectedhardness,
         selectedcolor,

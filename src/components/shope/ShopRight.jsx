@@ -10,6 +10,7 @@ import { UserContext } from '../../UserContext';
 
 
 const ShopRight = () => {
+
   const {isdraweropen,setisdraweropen} = useContext(UserContext);
   const [search , setsearch]=useState(false);
  
@@ -54,7 +55,7 @@ const ShopRight = () => {
   
   
   
-
+const {setnumberofcecords}=useContext(UserContext);
   
   return (
     <div style={{
@@ -63,7 +64,7 @@ const ShopRight = () => {
       <div className="row1" style={{
         "width":"100vw"
       }}>
-        <h1 >408,426 Results</h1>
+        <h1 >{setnumberofcecords?setnumberofcecords:'4048' }Results</h1>
         {
       search ? (
         <div className='searchfields'>
