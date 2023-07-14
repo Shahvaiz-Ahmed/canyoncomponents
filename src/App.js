@@ -3,15 +3,15 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import { MyContextProvider, UserContext } from "../src/UserContext";
 import { Routes, Route } from "react-router-dom";
-import Index from "./components/Index";
-import RequestQuote from "./components/REquestQutoe/RequestQuote";
-import SignIn from "./components/Signin/signin";
-import Signup from "./components/Signup/Signup";
-import Checkout from "./components/CheckoutComponent/Checkout";
-import CartPopup from "./components/CartPage/CartPopup";
+import Index from "./Components/Index";
+import RequestQuote from "./Components/REquestQutoe/RequestQuote";
+import SignIn from "./Components/Signin/signin";
+import Signup from "./Components/Signup/Signup";
+import Checkout from "./Components/CheckoutComponent/Checkout";
+import CartPopup from "./Components/CartPage/CartPopup";
 import axios from "axios";
 
-// import CheckPrice from './components/CheckPrice/CheckPrice';
+// import CheckPrice from './Components/CheckPrice/CheckPrice';
 
 function App() {
   const [sideMenuBar, setsideMenuBar] = useState(false);
