@@ -58,6 +58,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function NavBar() {
   const { setsideMenuBar } = useContext(UserContext);
+  const { cartCountBtn, setcartCountBtn,
+    cartArray, setcartArray} = useContext(UserContext)
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -118,7 +120,18 @@ export default function NavBar() {
               </Typography>
             </IconButton>
           </Box>
-          <Link to='/CartPopup' style={{display: 'flex', justifyContent: 'center'}}><ShoppingCartIcon  style={{ marginLeft: 25,  color: '#fff',  border: '#F4976C', cursor: 'pointer' }} /> </Link>
+          <Link to='/CartPopup' style={{display: 'flex', justifyContent: 'center', position: "relative", padding: "1rem"}}><div><ShoppingCartIcon  style={{ marginLeft: 25,  color: '#fff',  border: '#F4976C', cursor: 'pointer', scale: 2 }} /><div style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            borderRadius: "50%",
+            backgroundColor: 'red',
+            padding: "0.1rem",
+            width: "1.5rem",
+            textAlign: "center",
+            color: 'white',
+            fontWeight: 700
+          }} >{cartCountBtn}</div></div> </Link>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"

@@ -15,6 +15,8 @@ import axios from "axios";
 
 function App() {
   const [sideMenuBar, setsideMenuBar] = useState(false);
+  const [cartArray, setcartArray] = useState([])
+  const [cartCountBtn, setcartCountBtn] = useState(0)
   const [sideMenuBarDropDown, setsideMenuBarDropDown] = useState(false);
   const [sideMenuBarDropDownIndex, setsideMenuBarDropDownIndex] =
     useState(false);
@@ -128,6 +130,8 @@ function App() {
     <UserContext.Provider
       value={{
         setsize,
+        cartCountBtn, setcartCountBtn,
+        cartArray, setcartArray,
         size,
         cs,setCs,
         id,setid,search,

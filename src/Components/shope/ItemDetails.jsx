@@ -239,8 +239,9 @@ const navigate = useNavigate();
                     <TableCell>{row.DurometerScale}</TableCell>
                     <TableCell>{row.MaterialSubtype}</TableCell>
                     <TableCell>{row.SizeStandard}</TableCell>
-                    <TableCell>{row.Description2}</TableCell>
-                    <TableCell>{row.Description2}</TableCell>
+                    <TableCell>{row.CrossSectionalDiameterCS
+}</TableCell>
+                    <TableCell>{row.InsideDiameterID}</TableCell>
                     <TableCell>{row.Description2}</TableCell>
                     <TableCell>{row.HighTemperatureC}</TableCell>
                     <TableCell>{row.LowTemperatureC}</TableCell>
