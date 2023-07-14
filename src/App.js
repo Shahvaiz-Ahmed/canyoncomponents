@@ -53,7 +53,7 @@ function App() {
   
         });
   
-    }, []);
+    }, [accessToken]);
   
     // const [material, setmaterial] = useState()
   const [ItemDetails, setItemDetails] = useState();
@@ -98,6 +98,7 @@ function App() {
         setsideMenuBarDropDown,
         sideMenuBarDropDownIndex,
         setsideMenuBarDropDownIndex,
+        accessToken
       }}
     >
       <MyContextProvider>
