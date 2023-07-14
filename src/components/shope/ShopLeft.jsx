@@ -158,16 +158,16 @@ useEffect(()=>{
           <div className="hr"></div>
         </div>
         <CheckboxList />
-        <div className="flex">
+        {/* <div className="flex">
           <h2>Sub MATERIAL TYPE</h2>
           <div className="hr"></div>
         </div>
-        <SubMaterial/>
-        <div className="flex">
+        <SubMaterial/> */}
+        {/* <div className="flex">
           <h2>Compliance</h2>
           <div className="hr"></div>
         </div>
-         <Compliance/>  
+         <Compliance/>   */}
         <div className="flex">
           <h2>Hardness</h2>
           <div className="hr"></div>

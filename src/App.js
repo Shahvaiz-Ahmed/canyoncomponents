@@ -22,6 +22,7 @@ function App() {
   const [cs, setCs] = useState(0);
   const [id, setid] = useState(0);
   const [search, setsearch] = useState("");
+ const [selectedhardness, setselectedhardness] = useState([])
   // API DATA BELOW
   const [material, setmaterial] = useState(null);
   const [SubMaterial, setSubMaterial] = useState(null);
@@ -74,7 +75,6 @@ function App() {
         )
         .then((res) => {
           const items=res.data.value;
-          console.log('hello',items);
         
 
         let previousItemNo = null;
@@ -120,13 +120,25 @@ function App() {
         }
 
         setitem(productArray);
+        console.log(productArray);
               });
     };
   }, [item,accessToken]);
-  
+  const [selectedcolor, setselectedcolor] = useState([])
+  const [selectedmaterial, setselectedmaterial] = useState([])
+  const [selectedbrand, setselectedbrand] = useState([])
   return (
     <UserContext.Provider
       value={{
+        selectedhardness,
+        setselectedhardness,
+        selectedcolor,
+        setselectedcolor,
+        selectedmaterial,
+        setselectedmaterial,
+        setselectedcolor,
+        selectedbrand,
+        setselectedbrand,
         setsize,
         size,
         cs,setCs,
